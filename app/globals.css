@@ -1,27 +1,865 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Manrope", sans-serif;
+  border-color: transparent !important;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ebebd3 !important;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* START: General styles */
+.max-width {
+  @apply max-w-[1440px] mx-auto;
+}
+
+.padding-x {
+  @apply sm:px-16 px-6;
+}
+
+.padding-y {
+  @apply py-4;
+}
+
+.flex-center {
+  @apply flex items-center justify-center;
+}
+
+.flex-between {
+  @apply flex justify-between items-center;
+}
+
+.custom-btn {
+  @apply flex flex-row relative justify-center items-center py-3 px-6 outline-none;
+}
+
+/* END: General styles */
+
+/* END: search manufacturer styles */
+
+.bg-c1 {
+  background-color: #ece7e1;
+}
+
+.bg-c2 {
+  background-color: #b1a8a3;
+}
+
+.myClass1 {
+  color: red;
+}
+
+
+.btn {
+  font-weight: bolder !important;
+}
+
+
+.btn-2 {
+  background-color: #000 !important;
+  color: white !important;
+  font-size: 14px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  font-family: 'SinkinSans-Semibold', 'SinkinSans-700Bold', sans-serif;
+}
+
+
+
+@media (min-width: 1200px) {
+  @media (pointer: fine) {
+    .xl\:pointer-fine\:br_h-\[75px\] {
+      height: 100px !important;
+    }
+
+    .xl\:pointer-fine\:br_top-\[9px\] {
+      top: 25px !important;
+    }
+
+    .secondaryLevel {
+      top: 65px !important;
+    }
   }
+}
+
+
+.sywVideo {
+  color: #ebebd3 !important;
+  background-color: transparent !important;
+}
+
+.sywCarousel {
+  color: #ebebd3 !important;
+}
+
+.sywProductTabs-title {
+  color: #ebebd3 !important;
+  background-color: transparent !important;
+}
+
+.sywPaymentOptions {
+  color: #ebebd3 !important;
+}
+
+.SiteFooter__wrapper {
+  background: #ebebd3 !important;
+}
+
+
+a:hover {
+  color: #ef0f87 !important;
+  text-decoration: none;
+}
+
+#page-footer-mailto-support-bellroy-com-1 {
+  color: #eee !important;
+}
+
+
+.syw-cta-desktop:hover,
+.syw-cta-desktop:focus {
+  color: #ebebd3 !important;
+  text-decoration: none;
+}
+
+.productTabs,
+.productTabs__tabs,
+.syw-usps {
+  background: transparent !important;
+}
+
+
+.klaviyo_submit_button {
+  font-family: "Lato", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  background: #ef0f87;
+  text-align: center;
+  padding: 0 5px;
+  min-width: 100%;
+  outline: none;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+
+@media (min-width: 1100px) {
+  .syw-cta-desktop {
+    bottom: 33%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .syw-cta-desktop {
+    bottom: 30%;
+  }
+
+  #PageMenuPreHeader {
+    background-color: #fff
+  }
+}
+
+
+@media (max-width: 2300px) and (max-height: 900px) {
+  #PageMenuPreHeader {
+    background-color: #ebebd3
+  }
+}
+
+
+
+
+@media (min-width: 1300px) {}
+
+
+
+
+@media (max-width: 1199px) {
+
+
+  #PageMenuPreHeader {
+    background-color: #fff
+  }
+}
+
+@media (max-width: 720px) {
+  #newB1 {
+    right: 5em
+  }
+
+  #newB2 {
+    left: 5em
+  }
+
+  #PageMenuPreHeader {
+    background-color: #fff
+  }
+
+  .syw-cta-desktop {
+    bottom: 15%;
+  }
+
+  .logo {
+    max-height: 250px;
+  }
+
+}
+
+@media (min-width: 720px) {
+  #newB1 {
+    right: 28em
+  }
+
+  #newB2 {
+    left: 28em
+  }
+
+}
+
+
+@media (min-height: 1100px) and (min-width: 1300px) {
+  #PageMenuPreHeader {
+    background-color: #fff
+  }
+}
+
+
+
+#anchorNew:hover {
+  color: #ebebd3 !important;
+}
+
+.form-control {
+  border-radius: initial !important;
+}
+
+
+.form-control:focus {
+  box-shadow: none !important;
+  font-size: 14px !important;
+}
+
+
+.swiper-wrapper {
+  width: 1500px !important;
+}
+
+.car-card {
+  background-color: transparent;
+}
+
+.car-card:hover {
+  background-color: transparent;
+  --tw-shadow: none;
+}
+
+
+.HtmlProductAddToCart {
+  background-color: #ef0f87 !important;
+}
+
+button:focus {
+  outline: none !important;
+}
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+
+
+.select-theme {
+  margin-top: 20px;
+}
+
+.select-theme p {
+  margin: 0 0 5px 0;
+  padding: 0;
+}
+
+.radio-label {
+  color: #303030;
+  font-size: 14px;
+  font-weight: 400;
+  margin-right: 7px;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+.radio-input {
+  margin: 0;
+  visibility: hidden;
+}
+
+.radio-input:checked+span {
+  border: 2px solid #f4b400;
+}
+
+.radio-input:checked+span:after {
+  opacity: 1;
+}
+
+.custom-radio {
+  left: -8px;
+  top: 6px;
+  cursor: pointer;
+  width: 17px;
+  height: 17px;
+  border: 2px solid #9a9a9a;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+}
+
+/* for inner filled circle */
+.custom-radio::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background: #f4b400;
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+
+
+
+.MiniCart_Cart .MiniCart_Cart_SupportedPaymentTypes_Icons {
+  margin-top: 10px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+
+.MiniCart_Cart .MiniCart_Cart_SupportedPaymentTypes {
+  padding: 20px;
+}
+
+
+
+
+
+
+
+.wallet-image {
+  display: none;
+}
+
+.wallet-image.desktop {
+  display: block;
+}
+
+#logotoedit {
+  width: 7%;
+  position: absolute;
+  top: 3em;
+  left: 2em;
+}
+
+#logotoedits {
+  margin-top: 2em;
+}
+
+#myUniD {
+  box-shadow: 1px 1px 20px #0000001f;
+  background: #0d0d0dcc;
+  backdrop-filter: saturate(180%) blur(2rem);
+  -webkit-backdrop-filter: saturate(180%) blur(2rem);
+  border: 1px solid rgba(229, 231, 235, .2);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+}
+
+@media (max-width: 768px) {
+  #logotoedits {
+    margin-top: initial;
+  }
+
+  .wallet-image.desktop {
+    display: none;
+  }
+
+  .wallet-image.mobile {
+    display: block;
+  }
+
+  #myUniD {
+    position: fixed;
+  }
+
+  #logotoedit {
+    width: 80px;
+    margin-top: initial;
+  }
+
+
+
+
+  .SiteFooter__footNote {
+    margin-bottom: 4em;
+  }
+
+  #yourDivId {
+    margin-top: 2em;
+  }
+
+
+}
+
+
+
+
+
+
+a:hover {
+  color: #fff !important;
+  text-decoration: none;
+}
+
+
+h1,
+h2,
+h3,
+div,
+button {
+  font-family: 'Futura Std', sans-serif !important;
+  color: white !important;
+  text-transform: uppercase !important;
+
+}
+
+
+#mybbtn {
+  border-color: #ef0f87 !important;
+  padding: 8px 20px;
+  border: 2px solid #ef0f87;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background-color: transparent;
+  letter-spacing: 1px;
+
+
+}
+
+
+
+/* Weird class names and ids for the layout */
+.odd-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+  padding: 0 20px;
+  /* Adds padding on the sides for mobile */
+}
+
+@media(min-width: 768px) {
+
+  /* On larger screens, switch to row layout */
+  .odd-container {
+    flex-direction: row;
+    gap: 20px;
+    padding: 0;
+    /* Remove side padding for larger screens */
+  }
+}
+
+/* Video container with weird id */
+#vid-jump {
+  width: 600px;
+  height: 1000px;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  /* Align text and buttons to the left */
+  gap: 20px;
+  /* Space between elements */
+}
+
+#vid-xtra {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#vid-word-blast {
+  position: absolute;
+  bottom: 20%;
+  left: 10%;
+  /* Align text to the left */
+  transform: translateX(0);
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+
+#vid-action-push:hover {
+  background-color: #ef0f87;
+}
+
+/* Image container with a weird id */
+#pic-portal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pic-dream {
+  width: 600px;
+  height: 750px;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  /* Align text and buttons to the left */
+  gap: 20px;
+  /* Space between elements */
+}
+
+.pic-bubble {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pic-tagline {
+  position: absolute;
+  bottom: 16%;
+  left: 10%;
+  /* Align text to the left */
+  transform: translateX(0);
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.pic-button-splash {
+  position: absolute;
+  bottom: 4%;
+  left: 10%;
+  /* Align button to the left */
+  transform: translateX(0);
+  background-color: #ef0f87;
+  transition: background-color 0.3s ease;
+  border-color: #ef0f87 !important;
+  padding: 8px 20px;
+  border: 2px solid #ef0f87;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 1px;
+  box-shadow: 1px 1px 20px #0000001f;
+  background: #0d0d0d3a;
+  backdrop-filter: saturate(180%) blur(2rem);
+  -webkit-backdrop-filter: saturate(180%) blur(2rem);
+}
+
+.pic-button-splash:hover {
+  background-color: #ef0f87;
+}
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+
+  /* Add margin for mobile screens between content and edges */
+  .odd-container {
+    padding: 0 20px;
+    /* Add padding to left and right on small screens */
+  }
+
+  /* Adjust video and images for better mobile display */
+  #vid-jump {
+    width: 100%;
+    height: auto;
+    /* Allow video to adjust to screen size */
+    margin-bottom: 20px;
+  }
+
+  .pic-dream {
+    width: 100%;
+    height: auto;
+    /* Allow images to adjust to screen size */
+  }
+}
+
+
+header {
+  background-color: #ebebd3 !important;
+}
+
+#filterId1 {
+  background-color: #ebebd3 !important;
+}
+
+@media (min-width: 1200px) {
+  @media (pointer: fine) {
+    .xl\:pointer-fine\: {
+      --tw-bg-opacity: 1;
+      background-color: transparent !important;
+    }
+  }
+
+  #logotoedits{
+    width: 150px;
+   }
+}
+
+.MiniCart_Cart_Heading {
+  background-color: #ebebd3 !important;
+}
+
+#sec-9a83 {
+  background-color: #ebebd3 !important;
+}
+
+.u-section-1 {
+  background-color: #ebebd3 !important;
+}
+
+.myBB {
+  color: #ef0f87 !important;
+}
+
+
+
+
+
+
+@media (max-width: 2300px) and (max-height: 900px) {
+  #PageMenuPreHeader {
+    background-color: #0d0d0dcc !important;
+    position: fixed;
+    top: -2em;
+    right: 0;
+  }
+  #logotoedits{
+    position: fixed;
+    top: 1em;
+    left: 2em;
+  }
+}
+
+
+
+.pageHeaderMenuOverlay__close{
+  position: fixed !important;
+  top: 3em !important;
+  background-color: #222 !important;
+}
+
+
+@media (max-width: 720px) {
+  #PageMenuPreHeader {
+    position: sticky;
+  }
+  #logotoedits{
+    position: sticky;  
+  }
+  #filterId1 { 
+    z-index: 99999999999999999;
+  }
+
+  .pageHeaderMenuOverlay__close{ 
+    top: 1em !important; 
+  }
+
+  #page-header-homepage-1{
+    top: 5em;
+  }
+  #hamburger{
+    top: 3em;
+  }
+  .mobileNewsletter{
+    top:4.3em !important
+  }
+  #page-header-search-1{
+    position: fixed;
+    right: 1em;
+    top: 4.5em !important;
+  }
+
+  .pageHeaderMenuOverlay {
+    top:2em !important;
+}
+  .pageHeaderMenuOverlay__close {
+    top:3em !important;
+}
+
+
+  #PageMenuPreHeader {
+    box-shadow: 1px 1px 20px #0000001f;
+    background: #0d0d0dcc;
+    backdrop-filter: saturate(180%) blur(2rem);
+    -webkit-backdrop-filter: saturate(180%) blur(2rem);
+    border: 1px solid rgba(229, 231, 235, .2);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 100px;
+}
+}
+
+#myUniD {
+  position: fixed;
+  top: 1em;
+}
+
+.myNewC{
+  color: #ef0f87 !important;
+}
+
+@media (min-width: 1200px) {
+  @media (pointer: fine) {
+      .secondaryLevel {
+          top: 80px !important;
+      }
+  }
+}
+
+.menuicon {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-count {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  background-color: #ef0f87;
+  color: white;
+  font-size: 8px;
+  font-weight: bold;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+
+
+@media (min-width: 1200px) {
+  @media (pointer: fine) {
+      .xl\:pointer-fine\:br_pb-0 {
+          padding-bottom: 0;
+          margin-left: 17em;
+          margin-top: 1em;
+      }
+  }
+}
+
+
+input{
+  color: #222 !important;
+}
+
+.myGray{
+  color: #222 !important;
+}
+
+
+.pageHeaderMenuOverlay.open{
+  position: fixed;
+}
+
+
+
+
+.br_line-through {
+  text-decoration: line-through;
+  text-decoration-color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.default-img,
+.hover-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: opacity 0.3s ease-in-out;
+  
+}
+
+.hover-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0; /* Initially hidden */
+}
+
+/* Desktop Hover Effect */
+.image-container:hover .default-img {
+  opacity: 0;
+}
+
+.image-container:hover .hover-img {
+  opacity: 1;
+}
+
+/* Mobile Touch Effect (Only for the touched image) */
+.image-container.touch-active .default-img {
+  opacity: 0;
+}
+
+.image-container.touch-active .hover-img {
+  opacity: 1;
 }
