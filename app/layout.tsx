@@ -133,7 +133,7 @@ export default function RootLayout({
 
       <ScrollToTop />
       <Offer /> 
-      <GifLoader />
+      <GifLoader onComplete={false}/>
 
         
         <BooleanProvider>
