@@ -10,6 +10,7 @@ import QuantitySelector from '../../components/QuantitySelector';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
+import PriceConverter from "../../components/PriceConverter";
 
 const Page = () => {
   const [code, setCode] = useState("");
@@ -254,8 +255,8 @@ const Page = () => {
                       /><br />
                     </span>
                     <div className="flex items-center space-x-2">
-  <h1 className="mb-2 myNewC br_line-through font-bold text-lg">${price}</h1>
-  <h1 className="mb-2 myNewC font-bold text-lg">${discount}</h1>
+  <h1 className="mb-2 myNewC br_line-through font-bold text-lg"><PriceConverter priceInUSD={price} /></h1>
+  <h1 className="mb-2 myNewC font-bold text-lg"><PriceConverter priceInUSD={discount} /></h1>
 </div>
 
                   </div>

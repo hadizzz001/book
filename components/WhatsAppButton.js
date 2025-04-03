@@ -2,7 +2,7 @@
 import { useCart } from '../app/context/CartContext'; 
 import { useState } from 'react';
 
-const WhatsAppButton = ({ inputs, items, total, delivery, code }) => {
+const WhatsAppButton = ({ inputs, items, total, delivery, code, rate , cur}) => {
     const { cart, removeFromCart, updateQuantity, clearCart, isModalOpen, toggleModal ,subtotal} = useCart();
     const [error, setError] = useState(null);
 
@@ -57,6 +57,8 @@ const WhatsAppButton = ({ inputs, items, total, delivery, code }) => {
                     total,
                     delivery,
                     code,
+                    rate,
+                    cur,
 
                 }),
             });
@@ -82,7 +84,7 @@ const WhatsAppButton = ({ inputs, items, total, delivery, code }) => {
             return;
         }
 
-        const url = createWhatsAppURL(inputs, items , total, delivery, code);
+        const url = createWhatsAppURL(inputs, items , total, delivery, code, rate , cur);
         window.open(url, '_blank');
         createOrder();
         clearCart();
@@ -108,7 +110,7 @@ const WhatsAppButton = ({ inputs, items, total, delivery, code }) => {
 
 export default WhatsAppButton;
 
-const createWhatsAppURL = (inputs, items, total, delivery, code) => { 
+const createWhatsAppURL = (inputs, items, total, delivery, code , rate , cur) => { 
     const { address, fname, lname, phone , email} = inputs;
 
     // Calculate the total amount
@@ -129,13 +131,13 @@ const createWhatsAppURL = (inputs, items, total, delivery, code) => {
       Item ${index + 1}:
       - Name: ${item.title} 
       - Quantity: ${item.quantity}
-      - Price: $${item.discount}
+      - Price: ${item.discount * rate} ${cur}
       - Image: ${item.img[0]} 
     `).join('\n')}
 
-    Subtotal: $${totalAmount.toFixed(2)}
-    Delivery fee: $${delivery}
-    *Total Amount:* $${total}
+    Subtotal: ${totalAmount.toFixed(2) * rate} ${cur}
+    Delivery fee: ${delivery} ${cur}
+    *Total Amount:* ${total} ${cur}
   `;
 
     const encodedMessage = encodeURIComponent(message);

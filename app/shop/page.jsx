@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react"; 
 import { motion } from "framer-motion";
+import PriceConverter from "../../components/PriceConverter";
 
 
 
@@ -200,7 +201,7 @@ const Body = () => {
                   </h3>
                 </summary>
                 <div className="br_my-2 md:br_my-4 md:br_h-full br_w-full br_gap-x-5 br_columns-2 md:br_columns-1">
-                  {checkboxesData.map((category) => (
+                  {checkboxesData?.map((category) => (
                     <div
                       key={category.id}
                       className="br_block br_relative br_max-w-full br_w-full br_py-2 br_break-inside-avoid md:br_inline-block md:br_overflow-hidden md:br_m-0 md:br_p-0"
@@ -328,9 +329,9 @@ const Body = () => {
                     </h3>
                     <div className="price-container br_inline-flex br_flex-wrap br_gap-x-2 br_items-baseline apex:br_text-white group-[.centered]/tile:br_justify-center">
                       <span className="old-price br_text-gray-500 br_line-through myBB">
-                        ${item.price}
+                        <PriceConverter priceInUSD={item.price} />
                       </span>
-                      <span className="new-price myBB">${item.discount}</span>
+                      <span className="new-price myBB"><PriceConverter priceInUSD={item.discount} /></span>
                     </div>
                     <br />
                   </div>

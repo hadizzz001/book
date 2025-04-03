@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { TempProps } from "../types"; 
+import PriceConverter from "./PriceConverter";
 
 interface CarCardProps {
     temp: TempProps;
@@ -64,8 +65,8 @@ const CarCard5 = ({ temp }: CarCardProps) => {
                                         <a href={`/product?id=${_id}`} className="br_text-current br_no-underline">
                                             <h2 className="text-sm font-bold myBB py-1">{title}</h2>
                                             <h2 className="text-sm font-bold myBB py-1 m-0 p-0">{category}</h2>
-                                            <span className="old-price text-left text-sm py-1 br_line-through myBB">${price} USD</span>
-                                            <span className="old-price text-left text-sm bg-gray-500 py-1 rounded br_text-gray-500 ml-2">${discount} USD</span>
+                                            <span className="old-price text-left text-sm py-1 br_line-through myBB"><PriceConverter priceInUSD={price} /></span>
+                                            <span className="old-price text-left text-sm bg-gray-500 py-1 rounded br_text-gray-500 ml-2"><PriceConverter priceInUSD={discount} /></span>
                                         </a>
                                     </h3>
                                 </div>

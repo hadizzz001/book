@@ -8,21 +8,10 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 import { useCart } from '../context/CartContext';
 import WhatsAppButton from "../../components/WhatsAppButton";
+import PriceConverter1 from "../../components/PriceConverter1";
 
 
 const page = () => {
-
-  const { cart, removeFromCart, quantities, subtotal, addToCart } = useCart();
-  const [localQuantities, setLocalQuantities] = useState(quantities);
-  const [phone, setPhone] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-
-  const [promoCode, setPromoCode] = useState("");
-  const [promoCodes, setPromoCodes] = useState([]); // Store promo codes from API
-  const [usedAbcd1234, setUsedAbcd1234] = useState(false);
-  const [discountApplied, setDiscountApplied] = useState(false);
-  const [deliveryFee, setDeliveryFee] = useState(4);
-  const [total, setTotal] = useState((subtotal + deliveryFee).toFixed(2));
 
 
 
@@ -33,6 +22,112 @@ const page = () => {
     address: '',
     email: '',
   });
+
+  const { cart, removeFromCart, quantities, subtotal, addToCart } = useCart();
+  const [localQuantities, setLocalQuantities] = useState(quantities);
+  const [phone, setPhone] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [promoCode, setPromoCode] = useState("");
+  const [promoCodes, setPromoCodes] = useState([]);
+  const [usedAbcd1234, setUsedAbcd1234] = useState(false);
+  const [discountApplied, setDiscountApplied] = useState(false);
+  const [deliveryFee, setDeliveryFee] = useState(4);
+  const [total, setTotal] = useState((subtotal + deliveryFee).toFixed(2));
+
+  // Currency Conversion States
+  const [convertedSubtotal, setConvertedSubtotal] = useState(null);
+  const [convertedDeliveryFee, setConvertedDeliveryFee] = useState(null);
+  const [convertedTotal, setConvertedTotal] = useState(null);
+  const [exchangeRate, setExchangeRate] = useState(1);
+  const [currency, setCurrency] = useState("USD");
+
+  // ✅ Callback function to receive converted values
+  const handleCurrencyConversion = (rate, curr) => {
+    setConvertedSubtotal(
+      new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(subtotal * rate)
+    );
+
+    setConvertedDeliveryFee(
+      new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(deliveryFee * rate)
+    );
+
+    setConvertedTotal(
+      new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format((subtotal + deliveryFee) * rate)
+    );
+
+    setExchangeRate(rate);
+    setCurrency(curr);
+  };
+
+  useEffect(() => {
+    fetch("/api/offer")
+      .then((response) => response.json())
+      .then((data) => setPromoCodes(data))
+      .catch((error) => console.error("Error fetching promo codes:", error));
+
+    if (typeof window !== "undefined") {
+      const storedUsedAbcd1234 = localStorage.getItem("usedAbcd1234");
+      if (storedUsedAbcd1234 === "true") {
+        setUsedAbcd1234(true);
+      }
+    }
+
+    setDeliveryFee(4);
+  }, [subtotal]);
+
+  useEffect(() => {
+    setTotal((subtotal + deliveryFee).toFixed(2));
+  }, [subtotal, deliveryFee]);
+
+  const applyPromo = (event) => {
+    event.preventDefault();
+    if (promoCode.toLowerCase() === "abcd1234") {
+      if (usedAbcd1234) {
+        alert("You have already used this promo code.");
+        return;
+      }
+      const discountedTotal = ((subtotal + deliveryFee) * 0.9).toFixed(2);
+      setTotal(discountedTotal);
+      setUsedAbcd1234(true);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("usedAbcd1234", "true");
+      }
+      setDiscountApplied(true);
+      return;
+    }
+
+    if (promoCode.toLowerCase() === "freedelivery1" || subtotal > 50) {
+      setDeliveryFee(0);
+    }
+
+    const promo = promoCodes.find((p) => p.code.toLowerCase() === promoCode.toLowerCase());
+    if (promo) {
+      const discount = promo.per / 100;
+      setTotal(((subtotal + deliveryFee) * (1 - discount)).toFixed(2));
+      setDiscountApplied(true);
+    } else {
+      alert("Invalid promo code!");
+    }
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   const handleTextboxChange = (textboxName) => (e) => {
@@ -46,88 +141,6 @@ const page = () => {
       ...prevValues,
       [textboxName]: e.target.value,
     }));
-  };
-
-
-
-  const handleRemoveFromCart = (itemId) => {
-    removeFromCart(itemId);
-  };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  useEffect(() => {
-    // Fetch promo codes from API
-    fetch("/api/offer")
-      .then((response) => response.json())
-      .then((data) => setPromoCodes(data)) // Expecting [{ code: "ABC123", per: 10 }, { code: "XYZ789", per: 20 }]
-      .catch((error) => console.error("Error fetching promo codes:", error));
-
-    // Ensure localStorage is available (client-side)
-    if (typeof window !== "undefined") {
-      // Initialize usedAbcd1234 from localStorage
-      const storedUsedAbcd1234 = localStorage.getItem("usedAbcd1234");
-      if (storedUsedAbcd1234 === "true") {
-        setUsedAbcd1234(true);
-      }
-    }
-
-    // Update delivery fee when subtotal changes
-    setDeliveryFee(4);
-  }, [subtotal]);
-
-  useEffect(() => {
-    // Update total whenever subtotal or delivery fee changes
-    setTotal((subtotal + deliveryFee).toFixed(2));
-  }, [subtotal, deliveryFee]);
-
-  const applyPromo = (event) => {
-    event.preventDefault(); // Prevent page reload
-
-    // If the promo code is "abcd1234", apply a 10% discount
-    if (promoCode.toLowerCase() === "abcd1234") {
-      if (usedAbcd1234) {
-        alert("You have already used this promo code.");
-        return;
-      }
-      // Apply 10% discount and mark the promo code as used
-      const discountedTotal = ((subtotal + deliveryFee) * 0.9).toFixed(2);
-      setTotal(discountedTotal);
-      setUsedAbcd1234(true);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("usedAbcd1234", "true"); // Store that the promo code was used
-      }
-      setDiscountApplied(true); // Mark discount as applied
-      return; // Prevent further code checks if the promo is applied
-    }
-
-    // Check for free delivery promo code or subtotal >= 100
-    if (promoCode.toLowerCase() === "freedelivery1" || subtotal > 50) {
-      setDeliveryFee(0); // ✅ Delivery fee updates, triggering useEffect to update total
-    }
-
-    // Find the promo code from the API response
-    const promo = promoCodes.find((p) => p.code.toLowerCase() === promoCode.toLowerCase());
-    if (promo) {
-      const discount = promo.per / 100;
-      setTotal(((subtotal + deliveryFee) * (1 - discount)).toFixed(2)); // ✅ Uses latest state
-      setDiscountApplied(true);
-    } else {
-      alert("Invalid promo code!");
-    }
   };
 
 
@@ -188,7 +201,7 @@ const page = () => {
         type="text/css"
         media=""
       />
-
+      <PriceConverter1 priceInUSD={subtotal} onConvert={handleCurrencyConversion} />
       {cart && cart.length > 0 ? (
         <div className="wfacp-template-container">
 
@@ -268,8 +281,20 @@ const page = () => {
                                 <div className="wfacp_order_summary_item_total">
                                   <span className="woocommerce-Price-amount amount" style={{ color: "#82838e" }}>
                                     <bdi>
-                                      <span className="woocommerce-Price-currencySymbol" style={{ color: "#82838e" }}>$</span>
-                                      {(obj.discount * localQuantities[obj._id] || obj.discount).toFixed(2)}
+                                      <>
+                                        <PriceConverter1
+                                          priceInUSD={obj.discount}
+                                          onConvert={(price) => {
+                                            const convertedPrice = (price * obj.discount).toFixed(2);
+                                          }}
+                                        />
+                                        <br />
+
+                                        <span className="Currency_Monetary myNewC">
+                                          {localQuantities[obj._id] ? `${localQuantities[obj._id]}  ` : "Loading..."}
+                                        </span>
+
+                                      </>
                                     </bdi>
                                   </span>
                                 </div>
@@ -338,8 +363,7 @@ const page = () => {
                             <td>
                               <span className="woocommerce-Price-amount amount">
                                 <bdi>
-                                  <span className="woocommerce-Price-currencySymbol">$</span>
-                                  {subtotal.toFixed(2)}
+                                  {convertedSubtotal ? `${convertedSubtotal} ${currency}` : "Loading..."}
                                 </bdi>
                               </span>
                             </td>
@@ -349,8 +373,8 @@ const page = () => {
                             <td colSpan={1} style={{ textAlign: "right" }}>
                               <span className="woocommerce-Price-amount amount" style={{ color: "#82838e" }}>
                                 <bdi>
-                                  <span className="woocommerce-Price-currencySymbol" style={{ color: "#82838e" }}>$</span>
-                                  {deliveryFee.toFixed(2)}
+                                  {convertedDeliveryFee ? `${convertedDeliveryFee} ${currency}` : "Loading..."}
+
                                 </bdi>
                               </span>
                             </td>
@@ -361,8 +385,7 @@ const page = () => {
                               <strong>
                                 <span className="woocommerce-Price-amount amount">
                                   <bdi>
-                                    <span className="woocommerce-Price-currencySymbol">$</span>
-                                    {total}
+                                    {convertedTotal ? `${convertedTotal} ${currency}` : "Loading..."}
                                   </bdi>
                                 </span>
                               </strong>
@@ -794,15 +817,23 @@ const page = () => {
                                                           <div className="wfacp_order_summary_item_total">
                                                             <span className="woocommerce-Price-amount amount">
                                                               <bdi>
-                                                                <span className="woocommerce-Price-currencySymbol">
+                                                                {/* <span className="woocommerce-Price-currencySymbol">
                                                                   $
-                                                                </span>
-                                                                {(obj.discount * localQuantities[obj._id] || obj.discount).toFixed(2)}
+                                                                </span> */}
+
+                                                                <>
+                                                                  <PriceConverter1
+                                                                    priceInUSD={obj.discount}
+                                                                    onConvert={(price) => {
+                                                                      const convertedPrice = (price * obj.discount).toFixed(2);
+                                                                    }}
+                                                                  />
+                                                                </>
                                                               </bdi>
                                                             </span>{" "}
                                                           </div>
 
-                                                          <button className="Checkout_Cart_LineItems_LineItem_Remove" onClick={() => handleRemoveFromCart(obj._id)} style={{ position: "relative" }}>
+                                                          <button className="Checkout_Cart_LineItems_LineItem_Remove" onClick={() => removeFromCart(obj._id)} style={{ position: "relative" }}>
                                                             <span className="Checkout_Cart_LineItems_LineItem_Remove_Cross">
                                                               <span />
                                                               <span />
@@ -873,10 +904,7 @@ const page = () => {
                                                     <td>
                                                       <span className="woocommerce-Price-amount amount">
                                                         <bdi>
-                                                          <span className="woocommerce-Price-currencySymbol">
-                                                            $
-                                                          </span>
-                                                          {subtotal.toFixed(2)}
+                                                          {convertedSubtotal ? `${convertedSubtotal} ${currency}` : "Loading..."}
                                                         </bdi>
                                                       </span>
                                                     </td>
@@ -887,8 +915,7 @@ const page = () => {
                                                     <td colSpan={1} style={{ textAlign: "right" }}>
                                                       <span className="woocommerce-Price-amount amount" style={{ color: "#82838e" }}>
                                                         <bdi>
-                                                          <span className="woocommerce-Price-currencySymbol" style={{ color: "#82838e" }}>$</span>
-                                                          {deliveryFee.toFixed(2)}
+                                                          {convertedDeliveryFee ? `${convertedDeliveryFee} ${currency}` : "Loading..."}
                                                         </bdi>
                                                       </span>
                                                     </td>
@@ -908,10 +935,7 @@ const page = () => {
                                                       <strong>
                                                         <span className="woocommerce-Price-amount amount">
                                                           <bdi>
-                                                            <span className="woocommerce-Price-currencySymbol">
-                                                              $
-                                                            </span>
-                                                            {total}
+                                                            {convertedTotal ? `${convertedTotal} ${currency}` : "Loading..."}
                                                           </bdi>
                                                         </span>
                                                       </strong>{" "}
@@ -939,7 +963,7 @@ const page = () => {
 
 
                     {total !== null && (
-                      <WhatsAppButton inputs={inputs} items={cart} total={total} delivery={deliveryFee} code={promoCode} />
+                      <WhatsAppButton inputs={inputs} items={cart} total={convertedTotal} delivery={convertedDeliveryFee} code={promoCode} rate={exchangeRate} cur={currency} />
                     )}
 
 

@@ -5,6 +5,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import CarCard5 from '../components/CarCard5';
+import PriceConverter1 from "../components/PriceConverter1";
+import PriceConverter from "../components/PriceConverter";
 
 const Cart = () => {
     const { cart, removeFromCart, quantities, subtotal, addToCart } = useCart();
@@ -12,7 +14,17 @@ const Cart = () => {
     const { isBooleanValue, setBooleanValue } = useBooleanValue();
     const [errors, setErrors] = useState({});
     const [allTemp2, setAllTemps2] = useState();
-    const [maxStock, setMaxStock] = useState({}); // Store max stock for each item
+    const [maxStock, setMaxStock] = useState({});
+    const [convertedPrice, setConvertedPrice] = useState(null);
+    const [exchangeRate, setExchangeRate] = useState(1);
+    const [currency, setCurrency] = useState("USD");
+
+    // Callback function to get price from PriceConverter
+    const handlePriceConversion = (price, rate, curr) => {
+        setConvertedPrice(price);
+        setExchangeRate(rate);
+        setCurrency(curr);
+    };
 
     const handleRemoveFromCart = (itemId) => {
         removeFromCart(itemId);
@@ -166,7 +178,7 @@ const Cart = () => {
                                                             value={localQuantities[obj._id] || 1}
                                                             onChange={(e) => handleQuantityChange(obj._id, e.target.value)}
                                                             min="1"
-                                                            max={maxStock[obj._id] || 1} 
+                                                            max={maxStock[obj._id] || 1}
                                                         />
 
 
@@ -185,10 +197,26 @@ const Cart = () => {
                                                     )}
                                                     <div className="Checkout_Cart_LineItems_LineItem_Price">
                                                         <span className="Currency">
+
+
+
+
+                                                        <PriceConverter1
+                                                                    priceInUSD={obj.discount}
+                                                                    onConvert={(price) => {
+                                                                      const convertedPrice = (price * obj.discount).toFixed(2); 
+                                                                    }}
+                                                                  />
+                                                            <br />
                                                             <span className="Currency_Monetary myNewC">
-                                                                ${obj.discount * (localQuantities[obj._id] || 1)}
+                                                                {localQuantities[obj._id] ? `${localQuantities[obj._id]}  ` : "Loading..."}
                                                             </span>
-                                                            <span className="Currency_Code myNewC">USD</span>
+
+
+
+
+
+
                                                         </span>
                                                     </div>
                                                 </div>
@@ -216,8 +244,8 @@ const Cart = () => {
                                         <div className="Checkout_Cart_LineItems_LineItem_Details">
                                             <div className="Checkout_Cart_LineItems_LineItem_Price">
                                                 <span className="Currency">
-                                                    <span className="Currency_Monetary">Total: ${subtotal}</span>
-                                                    <span className="Currency_Code">USD</span>
+                                                    <span className="Currency_Monetary">Total: <PriceConverter priceInUSD={subtotal} /></span>
+                                                    {/* <span className="Currency_Code">USD</span> */}
                                                 </span>
                                             </div>
                                         </div>

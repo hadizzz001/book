@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useSearchParams } from 'next/navigation'
-
+import PriceConverter from "../../components/PriceConverter";
 
 
 const Body = () => {
@@ -178,9 +178,9 @@ const Body = () => {
                     </h3>
                     <div className="price-container br_inline-flex br_flex-wrap br_gap-x-2 br_items-baseline apex:br_text-white group-[.centered]/tile:br_justify-center">
                       <span className="old-price br_text-gray-500 br_line-through myBB">
-                        ${item.price}
+                      <PriceConverter priceInUSD={item.price} />
                       </span>
-                      <span className="new-price myBB">${item.discount}</span>
+                      <span className="new-price myBB"><PriceConverter priceInUSD={item.discount} /></span>
                     </div>
                     <br />
                   </div>
