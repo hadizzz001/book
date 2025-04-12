@@ -13,7 +13,7 @@ const PriceConverter = ({ priceInUSD, onConvert }) => {
   const arabicCountryCurrency = {
     AE: "AED", SA: "SAR", QA: "QAR", KW: "KWD", BH: "BHD",
     OM: "OMR", JO: "JOD", EG: "EGP", MA: "MAD", DZ: "DZD",
-    TN: "TND", LY: "LYD", LB: "LBP", IQ: "IQD", YE: "YER",
+    TN: "TND", LY: "LYD",  IQ: "IQD", YE: "YER",
     SY: "SYP", SD: "SDG", SO: "SOS", PS: "ILS"
   };
 

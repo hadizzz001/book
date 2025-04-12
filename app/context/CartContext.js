@@ -60,23 +60,24 @@ const CartProvider = ({ children }) => {
     setSubtotal(newSubtotal);
   }, [quantities, cart]);
 
-  const addToCart = (item, quantity = {}) => {
+  const addToCart = (item, quantity = {}, pre ) => {
     const existingCartItemIndex = cart.findIndex((cartItem) => String(cartItem._id) === String(item._id)); 
-console.log("the new q=", quantity);
-
+    console.log("the new q =", quantity, "pre =", pre);
+  
     if (existingCartItemIndex !== -1) {
       setQuantities((prevQuantities) => ({
         ...prevQuantities,
-        [item._id]:  quantity,
+        [item._id]: quantity,
       }));
-
+  
       dispatch({
         type: 'UPDATE_CART',
         payload: cart.map((cartItem) =>
           String(cartItem._id) === String(item._id)
             ? {
                 ...cartItem,
-                quantity:    quantity, 
+                quantity,
+                pre, // include the pre flag here
               }
             : cartItem
         ),
@@ -88,17 +89,19 @@ console.log("the new q=", quantity);
           ...cart,
           {
             ...item,
-            quantity, 
+            quantity,
+            pre, // include the pre flag here
           },
         ],
       });
-
+  
       setQuantities((prevQuantities) => ({
         ...prevQuantities,
         [item._id]: quantity,
       }));
     }
   };
+  
 
   const removeFromCart = (itemId) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: itemId });

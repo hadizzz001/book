@@ -41,23 +41,40 @@ const page = () => {
   const [exchangeRate, setExchangeRate] = useState(1);
   const [currency, setCurrency] = useState("USD");
 
-  // ✅ Callback function to receive converted values
-  const handleCurrencyConversion = (rate, curr) => {
-    setConvertedSubtotal(
-      new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(subtotal * rate)
-    );
+  const [isLoading, setIsLoading] = useState(true);
 
-    setConvertedDeliveryFee(
-      new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(deliveryFee * rate)
-    );
+  useEffect(() => {
+    if (subtotal !== null && subtotal !== undefined) {
+      setIsLoading(false); 
+    }
+  }, [subtotal]); 
 
-    setConvertedTotal(
-      new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format((subtotal + deliveryFee) * rate)
-    );
 
-    setExchangeRate(rate);
-    setCurrency(curr);
+ 
+  const handleCurrencyConversion = (rate, curr) => {  
+    // Check if subtotal is loaded
+    if (subtotal !== undefined && subtotal !== null) {
+      console.log("subtotal ", subtotal);
+      
+      setConvertedSubtotal(
+        new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(subtotal * rate)
+      );
+  
+      setConvertedDeliveryFee(
+        new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(deliveryFee * rate)
+      );
+  
+      setConvertedTotal(
+        new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format((subtotal + deliveryFee) * rate)
+      );
+  
+      setExchangeRate(rate);
+      setCurrency(curr);
+    }
+   
   };
+  
+ 
 
   useEffect(() => {
     fetch("/api/offer")
@@ -110,21 +127,7 @@ const page = () => {
     }
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
@@ -143,7 +146,7 @@ const page = () => {
     }));
   };
 
-
+ 
 
   return (
     <>
@@ -201,7 +204,11 @@ const page = () => {
         type="text/css"
         media=""
       />
-      <PriceConverter1 priceInUSD={subtotal} onConvert={handleCurrencyConversion} />
+      {isLoading ? (
+        <p>Loading subtotal...</p> // Show loading message if subtotal is not ready
+      ) : (
+        <PriceConverter1 priceInUSD={subtotal} onConvert={handleCurrencyConversion} />
+      )}
       {cart && cart.length > 0 ? (
         <div className="wfacp-template-container">
 

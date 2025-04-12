@@ -8,26 +8,13 @@ const WhatsAppButton = ({ inputs, items, total, delivery, code, rate , cur}) => 
 
  
     
-
-    // const createOrder =  () => { 
-        
-    //     fetch('api/sendOrder', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             items,
-    //             inputs,
-    //             total
-    //         })
-    //     });
-    // };
+ 
 
     const createOrder = async () => {
         try {
-            // Step 1: Decrease stock for each product in the order
+             
             for (const item of items) {
+                if (item.pre) continue;
                 const quantityToDecrease = parseInt(item.quantity, 10); // Convert quantity to integer
     
                 const response = await fetch(`/api/stock/${item._id}`, {
@@ -133,6 +120,7 @@ const createWhatsAppURL = (inputs, items, total, delivery, code , rate , cur) =>
       - Quantity: ${item.quantity}
       - Price: ${item.discount * rate} ${cur}
       - Image: ${item.img[0]} 
+      - Pre-Order: ${item.pre}  
     `).join('\n')}
 
     Subtotal: ${totalAmount.toFixed(2) * rate} ${cur}

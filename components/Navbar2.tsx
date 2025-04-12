@@ -5,6 +5,14 @@ import { useBooleanValue } from '../app/context/CartBoolContext';
 import { useCart } from '../app/context/CartContext';
 
 
+interface Category {
+  name: string;
+}
+
+interface SubCategory {
+  name: string;
+  category: string;
+}
 
 
 
@@ -13,30 +21,38 @@ function NavBar() {
   const [isActive, setIsActive] = useState(true);
   const { isBooleanValue, setBooleanValue } = useBooleanValue();
   const [isActive2, setIsActive2] = useState(true);
-  const { cart } = useCart();
-  const [isHovered, setIsHovered] = useState(true);
+  const { cart } = useCart();  
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [subCategories, setSubCategories] = useState<SubCategory[]>([]);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // Function to handle hover
-  const handleHover = () => {
-    setIsHovered(!isHovered);
-    var d = document.getElementById("myUniD");
-    var d1 = document.getElementById("yourDivId");
-    if (d && d1) {
-      if (isHovered) {
-        d.className += " br_submenu-open";
-        d1.className += " br_open";
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [catRes, subRes] = await Promise.all([
+          fetch('/api/category'),
+          fetch('/api/sub'),
+        ]);
+  
+        const [catData, subData] = await Promise.all([
+          catRes.json(),
+          subRes.json(),
+        ]);
+  
+        setCategories(catData.slice(0, 4)); // Only keep the first 5 categories
+        setSubCategories(subData);
+      } catch (error) {
+        console.error('Error fetching categories or subcategories:', error);
       }
-      else {
-        d.classList.remove("br_submenu-open");
-        d1.classList.remove("br_open");
-      }
-    }
-  };
+    };
+  
+    fetchData();
+  }, []);
+  
 
 
 
-
-
+ 
 
 
 
@@ -95,6 +111,10 @@ function NavBar() {
 
 
 
+
+
+
+
   return (
     <>
 
@@ -142,7 +162,7 @@ function NavBar() {
             "\n                .MiniCart_Slider_Overlay {\n                    width: 100vw;\n                    height: 100vh;\n                    position: fixed;\n                    top: 0;\n                    bottom: 0;\n                    left: 0;\n                    right: 0;\n                    z-index: 1000000000;\n                    background-color: #000;\n                    opacity: 0;\n                    pointer-events: none;\n                }\n                .MiniCart_Slider_Overlay-visible {\n                    opacity: 0.4;\n                    pointer-events: all;\n                    transition: opacity 200ms ease-in;\n                }\n                .MiniCart_Slider {\n                    position: fixed;\n                    right: 0;\n                    bottom: 0;\n                    top: 0;\n                    width: 435px;\n                    max-width: 90vw;\n                    z-index: 1000000000;\n                    opacity: 0;\n                    pointer-events: none;\n                    transform: translateX(100%);\n                    transition: all 200ms linear;\n                }\n                .MiniCart_Slider-visible {\n                    transform: translateX(0);\n                    transition: all 500ms linear;\n                    opacity: 1;\n                    pointer-events: all;\n                }\n                .MiniCart_Slider_CloseButton {\n                    position: absolute;\n                    right: 0;\n                    top: 0;\n                    z-index: 200;\n                }\n            "
         }}
       />
- 
+
 
       <Cart />
 
@@ -218,7 +238,7 @@ function NavBar() {
             data-auto-id="true"
             id="page-header-homepage-1"
           >
-            <img id="logotoedits" src="https://res.cloudinary.com/di6nzrtn3/image/upload/v1743593157/white_bikeu4.png" alt="" width={100} />
+            <img id="logotoedits" src="https://res.cloudinary.com/di6nzrtn3/image/upload/v1744404518/white1_jz4nbm.jpg" alt="" width={100} />
           </a>
           <button id='hamburger' className="hamburger xl:pointer-fine:br_invisible" onClick={handleClick}>
             <span />
@@ -240,35 +260,35 @@ function NavBar() {
               id="page-header-newsletter-1"
               onClick={handleClickc}
             >
-<span className="menuicon">
-  <svg
-    width="64px" height="64px"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    stroke="#fff"
-  >
-    <g id="SVGRepo_bgCarrier" strokeWidth={0} />
-    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
-    <g id="SVGRepo_iconCarrier">
-      <path
-        d="M3.74181 20.5545C4.94143 22 7.17414 22 11.6395 22H12.3607C16.8261 22 19.0589 22 20.2585 20.5545M3.74181 20.5545C2.54219 19.1091 2.95365 16.9146 3.77657 12.5257C4.36179 9.40452 4.65441 7.84393 5.7653 6.92196M3.74181 20.5545C3.74181 20.5545 3.74181 20.5545 3.74181 20.5545ZM20.2585 20.5545C21.4581 19.1091 21.0466 16.9146 20.2237 12.5257C19.6385 9.40452 19.3459 7.84393 18.235 6.92196M20.2585 20.5545C20.2585 20.5545 20.2585 20.5545 20.2585 20.5545ZM18.235 6.92196C17.1241 6 15.5363 6 12.3607 6H11.6395C8.46398 6 6.8762 6 5.7653 6.92196M18.235 6.92196C18.235 6.92196 18.235 6.92196 18.235 6.92196ZM5.7653 6.92196C5.7653 6.92196 5.7653 6.92196 5.7653 6.92196Z"
-        stroke="#fff"
-        strokeWidth="1.5"
-      />
-      <path
-        d="M9 6V5C9 3.34315 10.3431 2 12 2C13.6569 2 15 3.34315 15 5V6"
-        stroke="#fff"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </g>
-  </svg>
+              <span className="menuicon">
+                <svg
+                  width="64px" height="64px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  stroke="#fff"
+                >
+                  <g id="SVGRepo_bgCarrier" strokeWidth={0} />
+                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M3.74181 20.5545C4.94143 22 7.17414 22 11.6395 22H12.3607C16.8261 22 19.0589 22 20.2585 20.5545M3.74181 20.5545C2.54219 19.1091 2.95365 16.9146 3.77657 12.5257C4.36179 9.40452 4.65441 7.84393 5.7653 6.92196M3.74181 20.5545C3.74181 20.5545 3.74181 20.5545 3.74181 20.5545ZM20.2585 20.5545C21.4581 19.1091 21.0466 16.9146 20.2237 12.5257C19.6385 9.40452 19.3459 7.84393 18.235 6.92196M20.2585 20.5545C20.2585 20.5545 20.2585 20.5545 20.2585 20.5545ZM18.235 6.92196C17.1241 6 15.5363 6 12.3607 6H11.6395C8.46398 6 6.8762 6 5.7653 6.92196M18.235 6.92196C18.235 6.92196 18.235 6.92196 18.235 6.92196ZM5.7653 6.92196C5.7653 6.92196 5.7653 6.92196 5.7653 6.92196Z"
+                      stroke="#fff"
+                      strokeWidth="1.5"
+                    />
+                    <path
+                      d="M9 6V5C9 3.34315 10.3431 2 12 2C13.6569 2 15 3.34315 15 5V6"
+                      stroke="#fff"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                  </g>
+                </svg>
 
-  {cart && cart.length > 0 && (
-    <span className="cart-count">{cart.length}</span>
-  )}
-</span>
+                {cart && cart.length > 0 && (
+                  <span className="cart-count">{cart.length}</span>
+                )}
+              </span>
 
             </a>
           </div>
@@ -280,35 +300,35 @@ function NavBar() {
                   data-auto-id="true"
                   onClick={handleClickc}
                 >
-<span className="menuicon">
-  <svg
-    width="64px" height="64px"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    stroke="#fff"
-  >
-    <g id="SVGRepo_bgCarrier" strokeWidth={0} />
-    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
-    <g id="SVGRepo_iconCarrier">
-      <path
-        d="M3.74181 20.5545C4.94143 22 7.17414 22 11.6395 22H12.3607C16.8261 22 19.0589 22 20.2585 20.5545M3.74181 20.5545C2.54219 19.1091 2.95365 16.9146 3.77657 12.5257C4.36179 9.40452 4.65441 7.84393 5.7653 6.92196M3.74181 20.5545C3.74181 20.5545 3.74181 20.5545 3.74181 20.5545ZM20.2585 20.5545C21.4581 19.1091 21.0466 16.9146 20.2237 12.5257C19.6385 9.40452 19.3459 7.84393 18.235 6.92196M20.2585 20.5545C20.2585 20.5545 20.2585 20.5545 20.2585 20.5545ZM18.235 6.92196C17.1241 6 15.5363 6 12.3607 6H11.6395C8.46398 6 6.8762 6 5.7653 6.92196M18.235 6.92196C18.235 6.92196 18.235 6.92196 18.235 6.92196ZM5.7653 6.92196C5.7653 6.92196 5.7653 6.92196 5.7653 6.92196Z"
-        stroke="#fff"
-        strokeWidth="1.5"
-      />
-      <path
-        d="M9 6V5C9 3.34315 10.3431 2 12 2C13.6569 2 15 3.34315 15 5V6"
-        stroke="#fff"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </g>
-  </svg>
+                  <span className="menuicon">
+                    <svg
+                      width="64px" height="64px"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      stroke="#fff"
+                    >
+                      <g id="SVGRepo_bgCarrier" strokeWidth={0} />
+                      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
+                      <g id="SVGRepo_iconCarrier">
+                        <path
+                          d="M3.74181 20.5545C4.94143 22 7.17414 22 11.6395 22H12.3607C16.8261 22 19.0589 22 20.2585 20.5545M3.74181 20.5545C2.54219 19.1091 2.95365 16.9146 3.77657 12.5257C4.36179 9.40452 4.65441 7.84393 5.7653 6.92196M3.74181 20.5545C3.74181 20.5545 3.74181 20.5545 3.74181 20.5545ZM20.2585 20.5545C21.4581 19.1091 21.0466 16.9146 20.2237 12.5257C19.6385 9.40452 19.3459 7.84393 18.235 6.92196M20.2585 20.5545C20.2585 20.5545 20.2585 20.5545 20.2585 20.5545ZM18.235 6.92196C17.1241 6 15.5363 6 12.3607 6H11.6395C8.46398 6 6.8762 6 5.7653 6.92196M18.235 6.92196C18.235 6.92196 18.235 6.92196 18.235 6.92196ZM5.7653 6.92196C5.7653 6.92196 5.7653 6.92196 5.7653 6.92196Z"
+                          stroke="#fff"
+                          strokeWidth="1.5"
+                        />
+                        <path
+                          d="M9 6V5C9 3.34315 10.3431 2 12 2C13.6569 2 15 3.34315 15 5V6"
+                          stroke="#fff"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                        />
+                      </g>
+                    </svg>
 
-  {cart && cart.length > 0 && (
-    <span className="cart-count">{cart.length}</span>
-  )}
-</span>
+                    {cart && cart.length > 0 && (
+                      <span className="cart-count">{cart.length}</span>
+                    )}
+                  </span>
 
                 </a>
               </li>
@@ -331,10 +351,10 @@ function NavBar() {
           </nav>
         </div>
         {/* non_gendered_bags + non_gendered_wallets + non_spotlight */}
-        <div id='myUniD' style={{ background: "#0d0d0dcc" }} className='pageHeaderMenu br_group/menu br_z-50 br_pointer-events-none br_relative br_w-screen br_h-screen br_inset-0 br_overflow-hidden /25 br_opacity-0 br_transition-opacity br_ease-in-out br_duration-300 open:br_opacity-100 open:br_pointer-events-auto xl:pointer-fine:br_h-[75px] xl:pointer-fine:br_overflow-visible xl:pointer-fine:br_opacity-100 xl:pointer-fine:br_bg-transparent xl:pointer-fine:br_pointer-events-auto text-white  '>
+        <div id='myUniD' style={{ background: "#ffcce3" }} className='pageHeaderMenu br_group/menu br_z-50 br_pointer-events-none br_relative br_w-screen br_h-screen br_inset-0 br_overflow-hidden /25 br_opacity-0 br_transition-opacity br_ease-in-out br_duration-300 open:br_opacity-100 open:br_pointer-events-auto xl:pointer-fine:br_h-[75px] xl:pointer-fine:br_overflow-visible xl:pointer-fine:br_opacity-100 xl:pointer-fine:br_bg-transparent xl:pointer-fine:br_pointer-events-auto text-white  '>
           <div className="topLevel__close br_absolute br_inset-0"></div>
           <nav
-            className="topLevel  br_h-screen br_overflow-y-auto br_max-w-[420px] br_h-screen br_pb-36 br_-translate-x-full br_transition-transform br_ease-in-out br_duration-300 group-open/menu:br_translate-x-0 xl:pointer-fine:br_translate-x-0 xl:pointer-fine:br_overflow-visible xl:pointer-fine:br_z-10 xl:pointer-fine:br_h-auto xl:pointer-fine:br_max-w-none xl:pointer-fine:br_absolute xl:pointer-fine:br_left-0 xl:pointer-fine:br_top-[9px] xl:pointer-fine:br_pb-0"
+            className="mt-40 topLevel  br_h-screen br_overflow-y-auto br_max-w-[420px] br_h-screen br_pb-36 br_-translate-x-full br_transition-transform br_ease-in-out br_duration-300 group-open/menu:br_translate-x-0 xl:pointer-fine:br_translate-x-0 xl:pointer-fine:br_overflow-visible xl:pointer-fine:br_z-10 xl:pointer-fine:br_h-auto xl:pointer-fine:br_max-w-none xl:pointer-fine:br_absolute xl:pointer-fine:br_left-0 xl:pointer-fine:br_top-[9px] xl:pointer-fine:br_pb-0"
             data-location="Menu"
             data-roybell=""
           >
@@ -342,38 +362,110 @@ function NavBar() {
 
 
 
+
+
+ 
+
+
+
+
+
+
+            {categories.map((category, index) => {
+        const relatedSubs = subCategories.filter(
+          (sub) => sub.category === category.name
+        );
+
+        return (
+          <li
+            key={index}
+            className="br_group/item relative"
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
+            <a className="br_flex br_items-center br_justify-between br_px-8 br_py-4 br_border-b br_text-grey-600 br_text-lg-sans-bold-stretched br_no-underline">
+              <div style={{fontSize: "13px"}} className="br_flex br_items-center br_gap-2">{category.name}</div>
+            </a>
+
+            {relatedSubs.length > 0 && (
+              <div
+                className={`subMenu br_bg-white br_transition-all br_duration-300 br_ease-in-out
+                  xl:pointer-fine:br_absolute xl:pointer-fine:br_left-0 xl:pointer-fine:br_w-screen
+                  ${
+                    hoveredIndex === index
+                      ? 'br_max-h-[500px] br_opacity-100 br_pointer-events-auto br_z-20'
+                      : 'br_max-h-0 br_opacity-0 br_pointer-events-none'
+                  }`}
+              >
+                <div className="br_px-8 br_py-4 xl:pointer-fine:br_pb-8 xl:pointer-fine:br_pt-12">
+                  <hr className="br_hidden br_border-none xl:pointer-fine:br_block xl:pointer-fine:br_bg-grey-200 br_absolute br_w-full br_h-[1px] br_top-[5px] br_left-0" />
+                  <ul className="br_columns-2 br_gap-4 xl:pointer-fine:br_flex xl:pointer-fine:br_gap-5 xl:pointer-fine:br_justify-center xl:pointer-fine:br_items-stretch 2xl:pointer-fine:br_justify-start 2xl:pointer-fine:br_ml-[140px]">
+                    {relatedSubs.map((sub, subIndex) => (
+                      <li
+                        key={subIndex}
+                        className="br_group/sub-item br_break-inside-avoid xl:pointer-fine:br_w-[10vw] xl:pointer-fine:br_max-w-[120px] xl:pointer-fine:br_text-center"
+                      >
+                        <a
+                          href={`/search?subcat=${encodeURIComponent(sub.name)}`}
+                          className="br_block br_py-2 br_text-grey-500 br_no-underline br_text-base-sans-stretched hover:br_text-orange active:br_text-orange xl:pointer-fine:br_relative xl:pointer-fine:br_py-0 xl:pointer-fine:br_flex xl:pointer-fine:br_flex-col xl:pointer-fine:br_gap-1 xl:pointer-fine:br_items-center"
+                        >
+                          <span>{sub.name}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
+          </li>
+        );
+      })}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               <li className="br_group/item">
                 <a
                   className="br_flex br_items-center br_justify-between br_px-8 br_py-4  br_border-solid br_border-0 br_border-b  br_text-white br_text-lg-sans-bold-stretched br_no-underline xl:pointer-fine: xl:pointer-fine:br_text-base-sans-bold-stretched xl:pointer-fine:group-hover/item: xl:pointer-fine:focus:"
-                  href="/"
-                  id="2_phoneCases_all-phone-cases"
-                >
-                  <div className="br_flex br_items-center br_gap-2">
-                    Home
-                  </div>
-
-                </a>
-
-              </li>
-              <li className="br_group/item"
-                id="yourDivId"
-              >
-                <a
-                  className="br_flex br_items-center br_justify-between br_px-8 br_py-4  br_border-solid br_border-0 br_border-b  br_text-white br_text-lg-sans-bold-stretched br_no-underline xl:pointer-fine: xl:pointer-fine:br_text-base-sans-bold-stretched xl:pointer-fine:group-hover/item: xl:pointer-fine:focus:"
                   href="/shop"
+                  id="4_travel_all-travel"
                 >
-                  <div className="br_flex br_items-center br_gap-2">
-                    Shop
-                  </div>
+                  <div className="br_flex br_items-center br_gap-2">Shop All</div>
                 </a>
-
-
-
-
-
-
-
-
 
               </li>
               <li className="br_group/item">

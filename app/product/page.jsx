@@ -18,7 +18,8 @@ const Page = () => {
   const [translateXValue, setTranslateXValue] = useState(0);
   const [isActive1, setIsActive1] = useState(true);
   const [isActive2, setIsActive2] = useState(true);
-  const [quantity, setQuantity] = useState(1); // State for quantity
+  const [quantity, setQuantity] = useState(1);
+  const [pre, setPre] = useState(false);
   let b;
   let b2;
   const searchParams = useSearchParams();
@@ -148,7 +149,7 @@ const Page = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addToCart(allTemp1, quantity);
+    addToCart(allTemp1, quantity, pre);
     handleClickc();
   };
 
@@ -255,9 +256,9 @@ const Page = () => {
                       /><br />
                     </span>
                     <div className="flex items-center space-x-2">
-  <h1 className="mb-2 myNewC br_line-through font-bold text-lg"><PriceConverter priceInUSD={price} /></h1>
-  <h1 className="mb-2 myNewC font-bold text-lg"><PriceConverter priceInUSD={discount} /></h1>
-</div>
+                      <h1 className="mb-2 myNewC br_line-through font-bold text-lg"><PriceConverter priceInUSD={price} /></h1>
+                      <h1 className="mb-2 myNewC font-bold text-lg"><PriceConverter priceInUSD={discount} /></h1>
+                    </div>
 
                   </div>
                   <div className="bagsFeaturesGrid__gridWrapper">
@@ -287,12 +288,24 @@ const Page = () => {
                             <div className="">
                               <span className="ProvidersSingleProduct--selected">
                                 {stock > 0 ? (
-                                  <button type="submit" className="AddToCart HtmlProductAddToCart" style={{ borderRadius: "0" }}>
+                                  <button
+                                    type="submit"
+                                    className="AddToCart HtmlProductAddToCart"
+                                    style={{ borderRadius: "0" }}
+                                  >
                                     <span>ADD TO BAG</span>
                                   </button>
                                 ) : (
-                                  <p className='mt-10' style={{ color: "#222", fontSize: "24px" }}>Out of Stock</p>
+                                  <button
+                                    type="submit"
+                                    className="AddToCart HtmlProductAddToCart"
+                                    style={{ borderRadius: "0" }}
+                                    onClick={() => setPre(true)}
+                                  >
+                                    <span>PREORDER NOW</span>
+                                  </button>
                                 )}
+
                               </span>
                             </div>
                             <div className=""></div>

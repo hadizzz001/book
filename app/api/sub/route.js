@@ -10,7 +10,7 @@ export async function GET() {
     const collection = db.collection('Subcategory'); // Replace with your collection name
 
     // Use the sort method to order documents by 'id' in ascending order
-    const data = await collection.find().sort({ id: 1 }).toArray();
+    const data = await collection.find().toArray();
 
     return NextResponse.json(data); // Return data as JSON
   } catch (error) {

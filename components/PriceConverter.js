@@ -13,8 +13,8 @@ const PriceConverter = ({ priceInUSD }) => {
   const arabicCountryCurrency = {
     AE: "AED", SA: "SAR", QA: "QAR", KW: "KWD", BH: "BHD",
     OM: "OMR", JO: "JOD", EG: "EGP", MA: "MAD", DZ: "DZD",
-    TN: "TND", LY: "LYD", LB: "LBP", IQ: "IQD", YE: "YER",
-    SY: "SYP", SD: "SDG", SO: "SOS", PS: "ILS"
+    TN: "TND", LY: "LYD", IQ: "IQD", YE: "YER",
+    SY: "SYP", SD: "SDG", SO: "SOS", PS: "ILS"  
   };
 
   // Get user location
@@ -55,11 +55,11 @@ const PriceConverter = ({ priceInUSD }) => {
         const res = await fetch(`https://hexarate.paikama.co/api/rates/latest/USD?target=${selectedCurrency}`);
         if (!res.ok) throw new Error("Failed to fetch exchange rates.");
         const data = await res.json();
-        
+
         // Set the exchange rate using the 'mid' value from the API response
         if (data.data.mid) {
-          setExchangeRate(data.data.mid); 
-          
+          setExchangeRate(data.data.mid);
+
         } else {
           setError("Exchange rate unavailable.");
         }

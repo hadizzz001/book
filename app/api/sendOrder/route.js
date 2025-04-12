@@ -6,7 +6,7 @@ export const revalidate = 10;
 export async function POST(request) {
     try {
         const body = await request.json();
-        const { inputs, items, total, delivery, code, rate, cur} = body;
+        const { inputs, items, total, delivery, code, rate, cur, pre} = body;
         const client = await clientPromise; // Connect to MongoDB
         const db = client.db('test'); // Replace with your database name
         const collection = db.collection('Order'); // Replace with your collection name
@@ -24,6 +24,7 @@ export async function POST(request) {
             code: code,
             rate: rate,
             cur: cur,
+            pre: pre,
             date: formattedDate, // Added date field
         });
 

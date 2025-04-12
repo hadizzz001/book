@@ -384,7 +384,7 @@ button:focus {
 
 #myUniD {
   box-shadow: 1px 1px 20px #0000001f;
-  background: #0d0d0dcc;
+  background: #ffcce3;
   backdrop-filter: saturate(180%) blur(2rem);
   -webkit-backdrop-filter: saturate(180%) blur(2rem);
   border: 1px solid rgba(229, 231, 235, .2);
@@ -668,7 +668,7 @@ header {
 
 @media (max-width: 2300px) and (max-height: 900px) {
   #PageMenuPreHeader {
-    background-color: #0d0d0dcc !important;
+    background-color: #ffcce3 !important;
     position: fixed;
     top: -2em;
     right: 0;
@@ -729,7 +729,7 @@ header {
 
   #PageMenuPreHeader {
     box-shadow: 1px 1px 20px #0000001f;
-    background: #0d0d0dcc;
+    background: #ffcce3;
     backdrop-filter: saturate(180%) blur(2rem);
     -webkit-backdrop-filter: saturate(180%) blur(2rem);
     border: 1px solid rgba(229, 231, 235, .2);
