@@ -22,11 +22,15 @@ export default function Home() {
     <div className="u-clearfix u-sheet u-valign-middle u-sheet-1">
       <div className="u-align-center u-container-style u-group u-group-1">
         <div className="u-container-layout u-valign-middle">
-           
+        <br/><br/><br/><br/>
           <h2 className="u-text u-text-1 myBB" style={{fontFamily: '"Manrope", sans-serif',fontWeight: "bolder",marginBottom: "1em",fontSize: "3em"}}>About Company</h2>
           <p className="u-text u-text-2" style={{fontFamily: 'Frank Ruhl Libre, "PT Serif", "Noto Serif", "Noto Serif JP", "Noto Serif KR", "Noto Serif SC", "Noto Serif TC", ui-serif, Georgia, Cambria, Times New Roman, Times, serif',fontSize: "1.2rem",lineHeight: "2rem",fontWeight:"400", color:"#222"}}>
             {" "}
-            Twisted BookEnds is a skincare brand dedicated to providing high-quality, nourishing creams that enhance your natural beauty and rejuvenate your skin.
+            At Twisted Bookends, we specialize in bringing rare and exclusive editions to readers across the Middle East and Europe. Our collection focuses on special editions, fair-exclusive items, limited runs, and beautifully crafted hardcovers that are often difficult to find in the region.<br/><br/>
+
+As passionate book lovers, we understand the excitement of owning a unique edition and the challenge of finding it locally. That’s why we’ve built a bookstore dedicated to curating the most sought after titles from around the world, with a special emphasis on editions that aren’t easily accessible in Arab countries.<br/><br/>
+
+Twisted Bookends is more than a bookstore it’s a destination for collectors, dreamers, and every reader who treasures the extraordinary.<br/><br/>
           </p>
  
         </div>

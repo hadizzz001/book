@@ -392,12 +392,12 @@ const Footer = () => {
                                     <span>
                                         Contact{" "}
                                         <a
-                                            href="mailto:info@Twisted BookEnds-lb.com"
+                                            href="mailto:twistedbookends@gmail.com"
                                             data-auto-id="true"
                                             id="page-footer-mailto-support-bellroy-com-1"
-                                            className='myBB'
+                                            className='myBB' 
                                         >
-                                            info@Twisted BookEnds-lb.com
+                                            twistedbookends@gmail.com
                                         </a>
                                     </span>
                                 </p>

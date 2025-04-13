@@ -71,8 +71,8 @@ const WhatsAppButton = ({ inputs, items, total, delivery, code, rate , cur}) => 
             return;
         }
 
-        const url = createWhatsAppURL(inputs, items , total, delivery, code, rate , cur);
-        window.open(url, '_blank');
+        // const url = createWhatsAppURL(inputs, items , total, delivery, code, rate , cur);
+        // window.open(url, '_blank');
         createOrder();
         clearCart();
         setError(null);
@@ -97,38 +97,38 @@ const WhatsAppButton = ({ inputs, items, total, delivery, code, rate , cur}) => 
 
 export default WhatsAppButton;
 
-const createWhatsAppURL = (inputs, items, total, delivery, code , rate , cur) => { 
-    const { address, fname, lname, phone , email} = inputs;
+// const createWhatsAppURL = (inputs, items, total, delivery, code , rate , cur) => { 
+//     const { address, fname, lname, phone , email} = inputs;
 
-    // Calculate the total amount
-    const totalAmount = items.reduce((sum, item) => sum + item.discount * item.quantity, 0);
+//     // Calculate the total amount
+//     const totalAmount = items.reduce((sum, item) => sum + item.discount * item.quantity, 0);
  
     
 
-    // Formatting the message
-    const message = `
-    *Customer Information:*
-    Email: ${email}
-    Name: ${fname} ${lname} 
-    Phone: ${phone}
-    Address: ${address}
+//     // Formatting the message
+//     const message = `
+//     *Customer Information:*
+//     Email: ${email}
+//     Name: ${fname} ${lname} 
+//     Phone: ${phone}
+//     Address: ${address}
 
-    *Order Details:*
-    ${items.map((item, index) => `
-      Item ${index + 1}:
-      - Name: ${item.title} 
-      - Quantity: ${item.quantity}
-      - Price: ${item.discount * rate} ${cur}
-      - Image: ${item.img[0]} 
-      - Pre-Order: ${item.pre}  
-    `).join('\n')}
+//     *Order Details:*
+//     ${items.map((item, index) => `
+//       Item ${index + 1}:
+//       - Name: ${item.title} 
+//       - Quantity: ${item.quantity}
+//       - Price: ${item.discount * rate} ${cur}
+//       - Image: ${item.img[0]} 
+//       - Pre-Order: ${item.pre}  
+//     `).join('\n')}
 
-    Subtotal: ${totalAmount.toFixed(2) * rate} ${cur}
-    Delivery fee: ${delivery} ${cur}
-    *Total Amount:* ${total} ${cur}
-  `;
+//     Subtotal: ${totalAmount.toFixed(2) * rate} ${cur}
+//     Delivery fee: ${delivery} ${cur}
+//     *Total Amount:* ${total} ${cur}
+//   `;
 
-    const encodedMessage = encodeURIComponent(message);
-    const phoneNumber = '96176858204';  
-    return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-};
+//     const encodedMessage = encodeURIComponent(message);
+//     const phoneNumber = '96176858204';  
+//     return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+// };
