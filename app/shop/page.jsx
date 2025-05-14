@@ -9,17 +9,7 @@ const Body = () => {
   const [checkedCategories, setCheckedCategories] = useState([]);
   const [checkboxesDataSub, setCheckboxesDataSub] = useState([]);
   const [checkedSubcategories, setCheckedSubcategories] = useState([]);
-
-  const [touchedIndex, setTouchedIndex] = useState(null);
-
-  const handleTouchStart = (index) => {
-    setTouchedIndex(index);
-  };
-
-  const handleTouchEnd = () => {
-    setTimeout(() => setTouchedIndex(null), 2000); // Reset after 2s
-  };
-
+ 
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -108,30 +98,32 @@ const Body = () => {
     }
   };
 
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch("/api/products");
-      if (!response.ok) {
-        throw new Error("Failed to fetch products");
-      }
-
-      const data = await response.json();
-
-      const filteredData = data.filter((item) => {
-        const categoryMatch =
-          checkedCategories.length === 0 || checkedCategories.includes(item.category);
-
-        const subcategoryMatch =
-          checkedSubcategories.length === 0 || checkedSubcategories.includes(item.subcategory);
-
-        return categoryMatch && subcategoryMatch;
-      });
-
-      setTemp(filteredData);
-    } catch (error) {
-      console.error("Error fetching products:", error);
+const fetchProducts = async () => {
+  try {
+    const response = await fetch("/api/products");
+    if (!response.ok) {
+      throw new Error("Failed to fetch products");
     }
-  };
+
+    const data = await response.json();
+
+    const filteredData = data.filter((item) => {
+      const categoryMatch =
+        checkedCategories.length === 0 || checkedCategories.includes(item.category);
+
+      const subcategoryMatch =
+        checkedSubcategories.length === 0 || checkedSubcategories.includes(item.subcategory);
+
+      return categoryMatch && subcategoryMatch;
+    });
+
+    // Only take the first 15 items
+    setTemp(filteredData.slice(0, 15));
+  } catch (error) {
+    console.error("Error fetching products:", error);
+  }
+};
+
 
 
   const handleCheckboxChange = (categoryId) => {

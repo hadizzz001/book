@@ -12,21 +12,24 @@ const YourComponent = () => {
         fetchCategories();
     }, []);
 
-    const fetchCategories = () => {
-        fetch('/api/products5', { cache: 'no-store' })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Failed to fetch categories');
-                }
-                return response.json();
-            })
-            .then((data) => {
-                setAllTemps(data);
-            })
-            .catch((error) => {
-                console.error('Error fetching categories:', error);
-            });
-    };
+const fetchCategories = () => {
+    fetch('/api/products5', { cache: 'no-store' })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch categories');
+            }
+            return response.json();
+        })
+        .then((data) => {
+            // Get only the first 5 products
+            const firstFive = data.slice(0, 4);
+            setAllTemps(firstFive);
+        })
+        .catch((error) => {
+            console.error('Error fetching categories:', error);
+        });
+};
+
     
 
 

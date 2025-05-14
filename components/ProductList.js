@@ -13,30 +13,33 @@ const YourComponent = () => {
         fetchCategories();
     }, []);
 
-    const fetchCategories = async () => {
-        try {
-            const response = await fetch('/api/products', { cache: 'no-store' });
-            if (response.ok) {
-                const data = await response.json();
+const fetchCategories = async () => {
+    try {
+        const response = await fetch('/api/products', { cache: 'no-store' });
+        if (response.ok) {
+            const data = await response.json();
 
-                // Group products by category
-                const groupedData = data.reduce((acc, product) => {
-                    const category = product.category || 'Uncategorized';
-                    if (!acc[category]) {
-                        acc[category] = [];
-                    }
+            // Group and limit to 5 products per category
+            const groupedData = data.reduce((acc, product) => {
+                const category = product.category || 'Uncategorized';
+                if (!acc[category]) {
+                    acc[category] = [];
+                }
+                if (acc[category].length < 4) {
                     acc[category].push(product);
-                    return acc;
-                }, {});
+                }
+                return acc;
+            }, {});
 
-                setCategories(groupedData);
-            } else {
-                console.error('Failed to fetch categories');
-            }
-        } catch (error) {
-            console.error('Error fetching categories:', error);
+            setCategories(groupedData);
+        } else {
+            console.error('Failed to fetch categories');
         }
-    };
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+    }
+};
+
 
     return (
         <div className="ProvidersIfSelectedProductMatchesFilter mt-4">

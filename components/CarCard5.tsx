@@ -29,12 +29,9 @@ const CarCard5 = ({ temp }: CarCardProps) => {
                             <div className="">
                                 <div className="initial:br_row-span-1 br_col-start-1 br_row-start-1 br_relative">
                                     <div className="br_aspect-[1/1] sm:br_aspect-square">
-                                        <div 
-                                            className={`br_w-full br_h-full br_relative br_flex br_items-center br_justify-center image-container ${isTouched ? "touch-active" : ""}`} 
-                                            onTouchStart={handleTouchStart} 
-                                            onTouchEnd={handleTouchEnd}
+                                        <div  
                                         >
-                                            {/* Default Image */}
+                                         
                                             <img
                                                 src={img[0]}
                                                 alt="Default"
@@ -44,19 +41,7 @@ const CarCard5 = ({ temp }: CarCardProps) => {
                                                     height: "150px",
                                                     objectFit: "cover"
                                                 }}
-                                            />
-
-                                            {/* Hover Image */}
-                                            <img
-                                                src={img[1]}
-                                                alt="Hover"
-                                                className="hover-img"
-                                                style={{
-                                                    borderRadius: "20px", 
-                                                    height: "150px",
-                                                    objectFit: "cover"
-                                                }}
-                                            />
+                                            /> 
                                         </div>
                                     </div>
                                 </div>
