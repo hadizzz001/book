@@ -13,8 +13,6 @@ import 'swiper/css';
 import PriceConverter from "../../components/PriceConverter";
 
 const Page = () => {
-  const [code, setCode] = useState("");
-  const [isCodeValid, setIsCodeValid] = useState(false);
   const [translateXValue, setTranslateXValue] = useState(0);
   const [isActive1, setIsActive1] = useState(true);
   const [isActive2, setIsActive2] = useState(true);
@@ -36,6 +34,11 @@ const Page = () => {
   const router = useRouter();
   const [allTemp1, setAllTemps1] = useState();
   const [allTemp2, setAllTemps2] = useState();
+  const [bookType, setBookType] = useState('Paperback');
+
+  const handleChange = (e) => {
+    setBookType(e.target.value);
+  };
 
 
   useEffect(() => {
@@ -106,33 +109,7 @@ const Page = () => {
     setTranslateXValue(idx * sv);
   };
 
-  const handleClick1 = () => {
-    var d2 = document.getElementById("specID");
-    setIsActive1(!isActive1);
-    if (d2) {
-      if (isActive1) {
-        d2.className += " DynamicAccordion_Tab--open";
-        d2.classList.remove("DynamicAccordion_Tab--closed");
-      } else {
-        d2.className += " DynamicAccordion_Tab--closed";
-        d2.classList.remove("DynamicAccordion_Tab--open");
-      }
-    }
-  };
-
-  const handleClick2 = () => {
-    var d2 = document.getElementById("shipID");
-    setIsActive2(!isActive2);
-    if (d2) {
-      if (isActive2) {
-        d2.className += " DynamicAccordion_Tab--open";
-        d2.classList.remove("DynamicAccordion_Tab--closed");
-      } else {
-        d2.className += " DynamicAccordion_Tab--closed";
-        d2.classList.remove("DynamicAccordion_Tab--open");
-      }
-    }
-  };
+ 
 
   function handleClickc() {
     var cartb = document.getElementById("cartid");
@@ -149,7 +126,7 @@ const Page = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addToCart(allTemp1, quantity, pre);
+    addToCart(allTemp1, quantity, pre, bookType);
     handleClickc();
   };
 
@@ -237,12 +214,6 @@ const Page = () => {
                   </span>
                   <div className="ApexPriceAndFreeShippingWrapper">
 
-
-
-
-
-
-
                     <div>
                       <div className="FreeShippingMessage FreeShippingMessage--empty" />
                     </div>
@@ -259,6 +230,29 @@ const Page = () => {
                       <h1 className="mb-2 myNewC br_line-through font-bold text-lg"><PriceConverter priceInUSD={price} /></h1>
                       <h1 className="mb-2 myNewC font-bold text-lg"><PriceConverter priceInUSD={discount} /></h1>
                     </div>
+
+
+                   
+                    <p className='mb-2 myGray'>
+                      Format: 
+                    </p> 
+                    <p>
+                    <select
+                        id="bookType"
+                        value={bookType}
+                        onChange={handleChange}
+                        className="border rounded px-4 py-2 myGray"
+                      >
+                        <option value="Paperback" style={{ color: "gray" }}>Paperback</option>
+                        <option value="Hardcover" style={{ color: "gray" }}>Hardcover</option>
+                      </select>
+                    </p> 
+
+
+                     
+                  <br/>
+
+
 
                   </div>
                   <div className="bagsFeaturesGrid__gridWrapper">

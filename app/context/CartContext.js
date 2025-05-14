@@ -60,48 +60,53 @@ const CartProvider = ({ children }) => {
     setSubtotal(newSubtotal);
   }, [quantities, cart]);
 
-  const addToCart = (item, quantity = {}, pre ) => {
-    const existingCartItemIndex = cart.findIndex((cartItem) => String(cartItem._id) === String(item._id)); 
-    console.log("the new q =", quantity, "pre =", pre);
-  
-    if (existingCartItemIndex !== -1) {
-      setQuantities((prevQuantities) => ({
-        ...prevQuantities,
-        [item._id]: quantity,
-      }));
-  
-      dispatch({
-        type: 'UPDATE_CART',
-        payload: cart.map((cartItem) =>
-          String(cartItem._id) === String(item._id)
-            ? {
-                ...cartItem,
-                quantity,
-                pre, // include the pre flag here
-              }
-            : cartItem
-        ),
-      });
-    } else {
-      dispatch({
-        type: 'ADD_TO_CART',
-        payload: [
-          ...cart,
-          {
-            ...item,
-            quantity,
-            pre, // include the pre flag here
-          },
-        ],
-      });
-  
-      setQuantities((prevQuantities) => ({
-        ...prevQuantities,
-        [item._id]: quantity,
-      }));
-    }
-  };
-  
+const addToCart = (item, quantity = {}, pre, format) => {
+  const existingCartItemIndex = cart.findIndex(
+    (cartItem) => String(cartItem._id) === String(item._id)
+  );
+
+  console.log("the new q =", quantity, "pre =", pre, "format =", format);
+
+  if (existingCartItemIndex !== -1) {
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [item._id]: quantity,
+    }));
+
+    dispatch({
+      type: 'UPDATE_CART',
+      payload: cart.map((cartItem) =>
+        String(cartItem._id) === String(item._id)
+          ? {
+              ...cartItem,
+              quantity,
+              pre,
+              format, // Add format
+            }
+          : cartItem
+      ),
+    });
+  } else {
+    dispatch({
+      type: 'ADD_TO_CART',
+      payload: [
+        ...cart,
+        {
+          ...item,
+          quantity,
+          pre,
+          format, // Add format
+        },
+      ],
+    });
+
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [item._id]: quantity,
+    }));
+  }
+};
+
 
   const removeFromCart = (itemId) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: itemId });

@@ -20,7 +20,7 @@ const PriceConverter = ({ priceInUSD, onConvert }) => {
   useEffect(() => {
     const fetchLocation = async () => {
       try {
-        const res = await fetch("https://ipinfo.io/json?token=75ca8d7e3de900");
+        const res = await fetch("https://ipinfo.io/json?token=15ba98f7f74d02");
         if (!res.ok) throw new Error("Failed to fetch location.");
         const data = await res.json();
         setCountry(data.country);

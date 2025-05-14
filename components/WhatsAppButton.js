@@ -7,7 +7,7 @@ const WhatsAppButton = ({ inputs, items, total, delivery, code, rate , cur}) => 
     const [error, setError] = useState(null);
 
  
-    
+     
  
 
     const createOrder = async () => {

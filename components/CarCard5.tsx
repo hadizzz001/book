@@ -64,9 +64,9 @@ const CarCard5 = ({ temp }: CarCardProps) => {
                                     <h3 style={{ height: "100px" }} className="br_text-base-sans-spaced br_line-clamp-2 sm:br_line-clamp-none edition:br_text-grey-500 edition:br_hidden first:edition:br_inline edition:before:br_content-['_–_'] apex:edition:br_text-grey-300">
                                         <a href={`/product?id=${_id}`} className="br_text-current br_no-underline">
                                             <h2 className="text-sm font-bold myBB py-1">{title}</h2>
-                                            <h2 className="text-sm font-bold myBB py-1 m-0 p-0">{category}</h2>
-                                            <span className="old-price text-left text-sm py-1 br_line-through myBB"><PriceConverter priceInUSD={price} /></span>
-                                            <span className="old-price text-left text-sm bg-gray-500 py-1 rounded br_text-gray-500 ml-2"><PriceConverter priceInUSD={discount} /></span>
+                                            {/* <h2 className="text-sm font-bold myBB py-1 m-0 p-0">{category}</h2> */}
+                                            {/* <span className="old-price text-left text-sm py-1 br_line-through myBB"><PriceConverter priceInUSD={price} /></span>
+                                            <span className="old-price text-left text-sm bg-gray-500 py-1 rounded br_text-gray-500 ml-2"><PriceConverter priceInUSD={discount} /></span> */}
                                         </a>
                                     </h3>
                                 </div>

@@ -9,6 +9,7 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { useCart } from '../context/CartContext';
 import WhatsAppButton from "../../components/WhatsAppButton";
 import PriceConverter1 from "../../components/PriceConverter1";
+import ElementsForm from "../../components/ElementsForm";
 
 
 const page = () => {
@@ -40,41 +41,46 @@ const page = () => {
   const [convertedTotal, setConvertedTotal] = useState(null);
   const [exchangeRate, setExchangeRate] = useState(1);
   const [currency, setCurrency] = useState("USD");
+  const [paymentMethod, setPaymentMethod] = useState('cash');
 
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (subtotal !== null && subtotal !== undefined) {
-      setIsLoading(false); 
+      setIsLoading(false);
     }
-  }, [subtotal]); 
+  }, [subtotal]);
 
 
- 
-  const handleCurrencyConversion = (rate, curr) => {  
+  const handlePaymentChange = (e) => {
+    setPaymentMethod(e.target.value);
+  };
+
+
+  const handleCurrencyConversion = (rate, curr) => {
     // Check if subtotal is loaded
     if (subtotal !== undefined && subtotal !== null) {
       console.log("subtotal ", subtotal);
-      
+
       setConvertedSubtotal(
         new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(subtotal * rate)
       );
-  
+
       setConvertedDeliveryFee(
         new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(deliveryFee * rate)
       );
-  
+
       setConvertedTotal(
         new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format((subtotal + deliveryFee) * rate)
       );
-  
+
       setExchangeRate(rate);
       setCurrency(curr);
     }
-   
+
   };
-  
- 
+
+
 
   useEffect(() => {
     fetch("/api/offer")
@@ -127,7 +133,7 @@ const page = () => {
     }
   };
 
- 
+
 
 
 
@@ -146,7 +152,7 @@ const page = () => {
     }));
   };
 
- 
+
 
   return (
     <>
@@ -970,7 +976,57 @@ const page = () => {
 
 
                     {total !== null && (
-                      <WhatsAppButton inputs={inputs} items={cart} total={convertedTotal} delivery={convertedDeliveryFee} code={promoCode} rate={exchangeRate} cur={currency} />
+                      <div>
+                        <h3 className="text-lg font-semibold mb-2">Select Payment Method:</h3>
+                        <div className="mb-4">
+                          <label className="mr-4 myGray1">
+                            <input
+                              type="radio"
+                              value="cash"
+                              checked={paymentMethod === 'cash'}
+                              onChange={handlePaymentChange}
+                              className="mr-2 myGray1"
+                            />
+                            Cash on Delivery
+                          </label>
+                          <label className="myGray1">
+                            <input
+                              type="radio"
+                              value="online"
+                              checked={paymentMethod === 'online'}
+                              onChange={handlePaymentChange}
+                              className="mr-2 myGray1"
+                            />
+                            Online Payment
+                          </label>
+                        </div>
+
+                        {total !== null && (
+                          <>
+                            {paymentMethod === 'cash' ? (
+                              <WhatsAppButton
+                                inputs={inputs}
+                                items={cart}
+                                total={convertedTotal}
+                                delivery={deliveryFee}
+                                code={promoCode}
+                                rate={exchangeRate}
+                                cur={currency}
+                              />
+                            ) : (
+                              <ElementsForm
+                                personal={inputs}
+                                finalTotal={convertedTotal}
+                                finalTotalUSD={new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format((subtotal + deliveryFee))}
+                                code={promoCode}
+                                rate={exchangeRate}
+                                cur={currency}
+                              />
+                            )}
+                          </>
+                        )}
+                      </div>
+
                     )}
 
 

@@ -797,6 +797,9 @@ input{
 .myGray{
   color: #222 !important;
 }
+.myGray1{
+  color: #999999 !important;
+}
 
 
 .pageHeaderMenuOverlay.open{

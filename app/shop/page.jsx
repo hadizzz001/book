@@ -1,16 +1,16 @@
 "use client";
-import { useState, useEffect } from "react"; 
-import PriceConverter from "../../components/PriceConverter"; 
+import { useState, useEffect } from "react";
+import PriceConverter from "../../components/PriceConverter";
 
 const Body = () => {
   const [allTemp, setTemp] = useState()
   const [isActive1, setIsActive1] = useState(true);
   const [checkboxesData, setCheckboxesData] = useState([]);
-  const [checkedCategories, setCheckedCategories] = useState([]); 
+  const [checkedCategories, setCheckedCategories] = useState([]);
   const [checkboxesDataSub, setCheckboxesDataSub] = useState([]);
   const [checkedSubcategories, setCheckedSubcategories] = useState([]);
-   
-  const [touchedIndex, setTouchedIndex] = useState(null); 
+
+  const [touchedIndex, setTouchedIndex] = useState(null);
 
   const handleTouchStart = (index) => {
     setTouchedIndex(index);
@@ -18,7 +18,7 @@ const Body = () => {
 
   const handleTouchEnd = () => {
     setTimeout(() => setTouchedIndex(null), 2000); // Reset after 2s
-  }; 
+  };
 
 
   useEffect(() => {
@@ -46,11 +46,11 @@ const Body = () => {
         console.error("Error fetching subcategories:", error);
       }
     };
-  
+
     fetchSubcategories();
   }, []);
 
-  
+
   const handleSubCheckboxChange = (subId) => {
     setCheckedSubcategories((prev) =>
       prev.includes(subId)
@@ -58,10 +58,10 @@ const Body = () => {
         : [...prev, subId]
     );
   };
-  
 
 
- 
+
+
 
   const handleClick1 = () => {
     var d2 = document.getElementById("filterId1");
@@ -87,7 +87,7 @@ const Body = () => {
         d3.classList.remove("br_opacity-100");
       }
     }
-  }; 
+  };
 
   useEffect(() => {
     fetchCategories();
@@ -114,25 +114,25 @@ const Body = () => {
       if (!response.ok) {
         throw new Error("Failed to fetch products");
       }
-  
+
       const data = await response.json();
-  
+
       const filteredData = data.filter((item) => {
         const categoryMatch =
           checkedCategories.length === 0 || checkedCategories.includes(item.category);
-  
+
         const subcategoryMatch =
           checkedSubcategories.length === 0 || checkedSubcategories.includes(item.subcategory);
-  
+
         return categoryMatch && subcategoryMatch;
       });
-  
+
       setTemp(filteredData);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   };
-  
+
 
   const handleCheckboxChange = (categoryId) => {
     setCheckedCategories((prev) =>
@@ -148,7 +148,7 @@ const Body = () => {
   return (
 
 
-    <> 
+    <>
       <div className="br_min-h-screen br_relative md:mt-20 mt-5">
 
         <header className="br_text-white  br_p-3 br_pt-11 md:br_py-20 br_flex md:br_justify-center">
@@ -179,7 +179,7 @@ const Body = () => {
                   </svg>
                 </span>
               </button>
-            </div> 
+            </div>
             <div className="br_overflow-y-auto br_flex-grow br_pb-3">
               <details className="br_pl-4 md:br_pl-8 br_pr-4">
                 <summary className="br_list-none br_cursor-pointer [&::-webkit-details-marker]:br_hidden [&::marker]:br_hidden">
@@ -237,57 +237,57 @@ const Body = () => {
 
 
               <details className="br_pl-4 md:br_pl-8 br_pr-4">
-  <summary className="br_list-none br_cursor-pointer [&::-webkit-details-marker]:br_hidden [&::marker]:br_hidden">
-    <h3 className="br_border-solid br_border-0 br_border-b br_border-grey-300 br_text-white br_text-base-sans-bold-stretched br_pb-2 br_flex br_justify-between br_items-end br_pt-4 myNewC">
-      Subcategories
-      <div className="br_w-3 [details[open]_&]:br_rotate-180 br_transition-transform br_duration-200">
-        <svg
-          viewBox="0 0 11 6"
-          width={11}
-          height={6}
-          className="br_stroke-none br_fill-current br_w-full br_h-full myBB"
-        >
-          <path d="M5.4,4.4l4.5-4.2c0.2-0.3,0.7-0.3,0.9,0l-4.5,4.4L0.2,1.1c-0.3-0.3-0.3-0.7,0-0.9L5.4,4.4z" />
-        </svg>
-      </div>
-    </h3>
-  </summary>
+                <summary className="br_list-none br_cursor-pointer [&::-webkit-details-marker]:br_hidden [&::marker]:br_hidden">
+                  <h3 className="br_border-solid br_border-0 br_border-b br_border-grey-300 br_text-white br_text-base-sans-bold-stretched br_pb-2 br_flex br_justify-between br_items-end br_pt-4 myNewC">
+                    Subcategories
+                    <div className="br_w-3 [details[open]_&]:br_rotate-180 br_transition-transform br_duration-200">
+                      <svg
+                        viewBox="0 0 11 6"
+                        width={11}
+                        height={6}
+                        className="br_stroke-none br_fill-current br_w-full br_h-full myBB"
+                      >
+                        <path d="M5.4,4.4l4.5-4.2c0.2-0.3,0.7-0.3,0.9,0l-4.5,4.4L0.2,1.1c-0.3-0.3-0.3-0.7,0-0.9L5.4,4.4z" />
+                      </svg>
+                    </div>
+                  </h3>
+                </summary>
 
-  <div className="br_my-2 md:br_my-4 md:br_h-full br_w-full br_gap-x-5 br_columns-2 md:br_columns-1">
-    {checkboxesDataSub?.map((sub) => (
-      <div
-        key={sub.id}
-        className="br_block br_relative br_max-w-full br_w-full br_py-2 br_break-inside-avoid"
-      >
-        <label className="br_flex br_gap-4 br_cursor-pointer br_text-white br_text-base-sans-spaced br_py-1 md:br_py-2 myNewC">
-          <input
-            className="br_absolute br_h-0 br_w-0 br_opacity-0"
-            type="checkbox"
-            checked={checkedSubcategories.includes(sub.name)}
-            onChange={() => handleSubCheckboxChange(sub.name)}
-          />
-          <span className="br_shrink-0 br_relative br_h-[22px] br_w-[22px] br_border-[#4a4a4a] br_border-solid br_border br_rounded">
-            <img
-              src={
-                checkedSubcategories.includes(sub.name)
-                  ? "https://res.cloudinary.com/duppvjinz/image/upload/v1701685867/eprldb0uad9klcw2ki5z.png"
-                  : "https://res.cloudinary.com/duppvjinz/image/upload/v1701541407/jhvrodq8u9e8vjlwe964.png"
-              }
-              alt=""
-            />
-          </span>
-          {sub.name}
-        </label>
-      </div>
-    ))}
-  </div>
-</details>
+                <div className="br_my-2 md:br_my-4 md:br_h-full br_w-full br_gap-x-5 br_columns-2 md:br_columns-1">
+                  {checkboxesDataSub?.map((sub) => (
+                    <div
+                      key={sub.id}
+                      className="br_block br_relative br_max-w-full br_w-full br_py-2 br_break-inside-avoid"
+                    >
+                      <label className="br_flex br_gap-4 br_cursor-pointer br_text-white br_text-base-sans-spaced br_py-1 md:br_py-2 myNewC">
+                        <input
+                          className="br_absolute br_h-0 br_w-0 br_opacity-0"
+                          type="checkbox"
+                          checked={checkedSubcategories.includes(sub.name)}
+                          onChange={() => handleSubCheckboxChange(sub.name)}
+                        />
+                        <span className="br_shrink-0 br_relative br_h-[22px] br_w-[22px] br_border-[#4a4a4a] br_border-solid br_border br_rounded">
+                          <img
+                            src={
+                              checkedSubcategories.includes(sub.name)
+                                ? "https://res.cloudinary.com/duppvjinz/image/upload/v1701685867/eprldb0uad9klcw2ki5z.png"
+                                : "https://res.cloudinary.com/duppvjinz/image/upload/v1701541407/jhvrodq8u9e8vjlwe964.png"
+                            }
+                            alt=""
+                          />
+                        </span>
+                        {sub.name}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </details>
 
 
 
-            </div> 
+            </div>
 
-          </div> 
+          </div>
 
           <div className="br_flex-1" onClick={handleClick1}>
             <div className="br_flex br_justify-between br_items-center br_gap-4 br_mb-2 br_px-4 br_my-4 md:br_justify-end">
@@ -303,72 +303,69 @@ const Body = () => {
                   Filters
                 </button>
               </div>
-            </div> 
+            </div>
             <div className="br_@container">
               <div
                 className="br_group/tile-grid br_grid br_grid-flow-dense br_gap-1 br_py-1 br_grid-cols-2 sm:br_grid-cols-[repeat(auto-fill,minmax(250px,1fr))] sm:br_px-1 lg:br_grid-cols-[repeat(auto-fill,minmax(285px,1fr))] supports-[container-type]:sm:br_grid-cols-2 supports-[container-type]:sm:@[640px]:br_grid-cols-[repeat(auto-fill,minmax(250px,1fr))] supports-[container-type]:lg:@[1024px]:br_grid-cols-[repeat(auto-fill,minmax(285px,1fr))]"
 
               >
- 
+
                 {allTemp && allTemp.length > 0 ? (
                   allTemp.map((item, index) => (
-                    <div
-                      key={item._id}
-                      className="br_grid br_grid-cols-1 supports-subgrid:br_row-span-4 supports-subgrid:br_grid-rows-[subgrid]"
+                    <a
+                      href={`/product?id=${item._id}&&imgg=${item.img[0]}`}
                     >
                       <div
-                        className={`image-container ${touchedIndex === index ? "touch-active" : ""
-                          }`}
-                        onTouchStart={() => handleTouchStart(index)}
-                        onTouchEnd={handleTouchEnd}
+                        key={item._id}
+                        className="br_grid br_grid-cols-1 supports-subgrid:br_row-span-4 supports-subgrid:br_grid-rows-[subgrid]"
                       >
-                        {/* Default Image */}
-                        <img className="default-img" src={item.img[0]} alt="Default" />
+                        <div
+                        >
+                          {/* Default Image */}
+                          <img className="default-img" src={item.img[0]} alt="Default" />
+                        </div>
 
-                        {/* Hover Image */}
-                        <img className="hover-img" src={item.img[1]} alt="Hover" />
-                      </div>
-
-                      <div className="Layout br_contents">
-                        <span className="br_contents br_edition-">
-                          <div className="br_grid br_grid-cols-1 br_grid-rows-[auto_auto_1fr_auto] supports-subgrid:br_row-span-4 supports-subgrid:br_grid-rows-[subgrid] initial:br_text-white apex:br_bg-[#4e4e4e] apex:br_text-white br_gap-2 br_pb-3 br_group/tile br_relative">
-                            <div
-                              style={{ textAlign: "center" }}
-                              className="initial:br_row-span-1 br_col-start-1 br_row-start-2 br_px-3 group-[.centered]/tile:br_justify-center group-[.centered]/tile:br_text-center"
-                            >
-                              <h3 className="myNewC br_text-base-sans-spaced br_line-clamp-2 sm:br_line-clamp-none edition:br_text-grey-500 edition:br_hidden first:edition:br_inline edition:before:br_content-['_–_'] apex:edition:br_text-grey-300">
-                                <a
-                                  href={`/product?id=${item._id}&&imgg=${item.img[0]}`}
-                                  className="br_text-current br_no-underline"
-                                  id="anchorNew"
-                                >
-                                  {item.title}
-                                  <br />
-                                  {item.category}
-                                  <span
-                                    className="br_absolute br_inset-0 br_z-10"
-                                    aria-hidden="true"
-                                  />
-                                </a>
-                              </h3>
-                              <div className="price-container br_inline-flex br_flex-wrap br_gap-x-2 br_items-baseline apex:br_text-white group-[.centered]/tile:br_justify-center">
-                                <span className="old-price br_text-gray-500 br_line-through myBB">
+                        <div className="Layout br_contents">
+                          <span className="br_contents br_edition-">
+                            <div className="br_grid br_grid-cols-1 br_grid-rows-[auto_auto_1fr_auto] supports-subgrid:br_row-span-4 supports-subgrid:br_grid-rows-[subgrid] initial:br_text-white apex:br_bg-[#4e4e4e] apex:br_text-white br_gap-2 br_pb-3 br_group/tile br_relative">
+                              <div
+                                style={{ textAlign: "center" }}
+                                className="initial:br_row-span-1 br_col-start-1 br_row-start-2 br_px-3 group-[.centered]/tile:br_justify-center group-[.centered]/tile:br_text-center"
+                              >
+                                <h3 className="myNewC br_text-base-sans-spaced br_line-clamp-2 sm:br_line-clamp-none edition:br_text-grey-500 edition:br_hidden first:edition:br_inline edition:before:br_content-['_–_'] apex:edition:br_text-grey-300">
+                                  <a
+                                    href={`/product?id=${item._id}&&imgg=${item.img[0]}`}
+                                    className="br_text-current br_no-underline"
+                                    id="anchorNew"
+                                  >
+                                    {item.title}
+                                    <br />
+                                    {item.category}
+                                    <span
+                                      className="br_absolute br_inset-0 br_z-10"
+                                      aria-hidden="true"
+                                    />
+                                  </a>
+                                </h3>
+                                <div className="price-container br_inline-flex br_flex-wrap br_gap-x-2 br_items-baseline apex:br_text-white group-[.centered]/tile:br_justify-center">
+                                  {/* <span className="old-price br_text-gray-500 br_line-through myBB">
                                   <PriceConverter priceInUSD={item.price} />
                                 </span>
-                                <span className="new-price myBB"><PriceConverter priceInUSD={item.discount} /></span>
+                                <span className="new-price myBB"><PriceConverter priceInUSD={item.discount} /></span> */}
+                                </div>
+                                <br />
                               </div>
-                              <br />
                             </div>
-                          </div>
-                        </span>
+                          </span>
+                        </div>
                       </div>
-                    </div>
+                    </a>
                   ))
                 ) : (
                   <div className="home___error-container">
                     <h2 className="text-black text-xl dont-bold">...</h2>
                   </div>
-                )} 
+                )}
 
               </div>
             </div>
@@ -379,9 +376,9 @@ const Body = () => {
 
       <div>
 
-      </div> 
+      </div>
 
-    </> 
+    </>
 
   )
 }
