@@ -37,15 +37,15 @@ export default function RootLayout({
   />
   <meta content="max-image-preview:large" name="robots" />
   <title>
-    Twisted BookEnds
+    Twisted BookEnds Lebanon
   </title>
   <meta
-    content="At Twisted BookEnds, we're reshaping the way businesses connect."
+    content="At Twisted BookEnds Lebanon. Your place to find the best books, stories, and writings."
     name="description" 
   />
-  <meta content="Twisted BookEnds" name="keywords" property="Twisted BookEnds, Twisted BookEnds, men, women" />
+  <meta content="Twisted BookEnds" name="keywords" property="Twisted BookEnds, Lebanon , Twisted BookEnds, books, book, stories, story, writing, writings, books, book, stories, story, writing, writings" />
   <meta
-    content="Twisted BookEnds"
+    content="Twisted BookEnds Lebanon"
     name=""
     property="og:title"
   />
@@ -56,28 +56,28 @@ export default function RootLayout({
   />
   <meta content="website" name="" property="og:type" />
   <meta
-    content="At Twisted BookEnds, we're reshaping the way businesses connect."
+    content="At Twisted BookEnds Lebanon. Your place to find the best books, stories, and writings."
     name=""
     property="og:description"
   />
   <meta
-    content="https://res.cloudinary.com/di6nzrtn3/image/upload/v1743596940/logo_addmcn.png"
+    content="https://res.cloudinary.com/di6nzrtn3/image/upload/v1748790795/ico_wqjws3.webp"
     name=""
     property="og:image"
   />
    
   <link
-    href="https://res.cloudinary.com/di6nzrtn3/image/upload/v1743596940/logo_addmcn.png"
+    href="https://res.cloudinary.com/di6nzrtn3/image/upload/v1748790795/ico_wqjws3.webp"
     rel="apple-touch-icon"
     sizes="180x180"
   />
   <link
-    href="https://res.cloudinary.com/di6nzrtn3/image/upload/v1743596940/logo_addmcn.png"
+    href="https://res.cloudinary.com/di6nzrtn3/image/upload/v1748790795/ico_wqjws3.webp"
     rel="icon"
     sizes="32x32" 
   />
   <link
-    href="https://res.cloudinary.com/di6nzrtn3/image/upload/v1743596940/logo_addmcn.png"
+    href="https://res.cloudinary.com/di6nzrtn3/image/upload/v1748790795/ico_wqjws3.webp"
     rel="icon"
     sizes="16x16" 
   /> 
