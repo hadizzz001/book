@@ -179,7 +179,7 @@ const Footer = () => {
                             <li>
                                 <a
                                     target="_blank"
-                                    href="https://www.instagram.com/twisted.bookends"
+                                    href="http://instagram.com/twistedbookends.lb"
                                     data-auto-id="true"
                                     id="page-footer-http-www-instagram-com-bellroy-1"
                                 >
@@ -206,10 +206,10 @@ const Footer = () => {
                                     </svg>
                                 </a>
                             </li>
-                            {/* <li>
+                            <li>
                                 <a
                                     target="_blank"
-                                    href="https://www.facebook.com/share/18xSqQqfxr/"
+                                    href="https://www.facebook.com/profile.php?id=61577009487739"
                                     data-auto-id="true"
                                     id="page-footer-https-www-facebook-com-bellroy-official-1"
                                 >
@@ -226,11 +226,11 @@ const Footer = () => {
                                         />
                                     </svg>
                                 </a>
-                            </li> */}
+                            </li>
                             <li>
                                 <a
                                     target="_blank"
-                                    href="https://wa.me/96176858204"
+                                    href="https://wa.me/66832486675"
                                     data-auto-id="true"
                                     id="page-footer-https-www-youtube-com-channel-ucy6vodc_wyzj4rlslixgp1q-1"
                                 >
@@ -392,12 +392,12 @@ const Footer = () => {
                                     <span>
                                         Contact{" "}
                                         <a
-                                            href="mailto:twistedbookends@gmail.com"
+                                            href="mailto:info@twistedbookends.com"
                                             data-auto-id="true"
                                             id="page-footer-mailto-support-bellroy-com-1"
                                             className='myBB' 
                                         >
-                                            twistedbookends@gmail.com
+                                            info@twistedbookends.com
                                         </a>
                                     </span>
                                 </p>

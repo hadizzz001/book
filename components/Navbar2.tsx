@@ -238,7 +238,7 @@ function NavBar() {
             data-auto-id="true"
             id="page-header-homepage-1"
           >
-            <img id="logotoedits" src="https://res.cloudinary.com/di6nzrtn3/image/upload/v1744404518/white1_jz4nbm.jpg" alt="" width={100} />
+            <img id="logotoedits" src="https://res.cloudinary.com/di6nzrtn3/image/upload/v1748788159/Untitled-removebg-preview1_uvvfih.png" alt="" width={200} />
           </a>
           <button id='hamburger' className="hamburger xl:pointer-fine:br_invisible" onClick={handleClick}>
             <span />
@@ -266,19 +266,19 @@ function NavBar() {
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  stroke="#999"
+                  stroke="#ef0f87"
                 >
                   <g id="SVGRepo_bgCarrier" strokeWidth={0} />
                   <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
                   <g id="SVGRepo_iconCarrier">
                     <path
                       d="M3.74181 20.5545C4.94143 22 7.17414 22 11.6395 22H12.3607C16.8261 22 19.0589 22 20.2585 20.5545M3.74181 20.5545C2.54219 19.1091 2.95365 16.9146 3.77657 12.5257C4.36179 9.40452 4.65441 7.84393 5.7653 6.92196M3.74181 20.5545C3.74181 20.5545 3.74181 20.5545 3.74181 20.5545ZM20.2585 20.5545C21.4581 19.1091 21.0466 16.9146 20.2237 12.5257C19.6385 9.40452 19.3459 7.84393 18.235 6.92196M20.2585 20.5545C20.2585 20.5545 20.2585 20.5545 20.2585 20.5545ZM18.235 6.92196C17.1241 6 15.5363 6 12.3607 6H11.6395C8.46398 6 6.8762 6 5.7653 6.92196M18.235 6.92196C18.235 6.92196 18.235 6.92196 18.235 6.92196ZM5.7653 6.92196C5.7653 6.92196 5.7653 6.92196 5.7653 6.92196Z"
-                      stroke="#999"
+                      stroke="#ef0f87"
                       strokeWidth="1.5"
                     />
                     <path
                       d="M9 6V5C9 3.34315 10.3431 2 12 2C13.6569 2 15 3.34315 15 5V6"
-                      stroke="#999"
+                      stroke="#ef0f87"
                       strokeWidth="1.5"
                       strokeLinecap="round"
                     />
@@ -306,19 +306,19 @@ function NavBar() {
                       viewBox="0 0 24 24"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke="#999"
+                      stroke="#ef0f87"
                     >
                       <g id="SVGRepo_bgCarrier" strokeWidth={0} />
                       <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
                       <g id="SVGRepo_iconCarrier">
                         <path
                           d="M3.74181 20.5545C4.94143 22 7.17414 22 11.6395 22H12.3607C16.8261 22 19.0589 22 20.2585 20.5545M3.74181 20.5545C2.54219 19.1091 2.95365 16.9146 3.77657 12.5257C4.36179 9.40452 4.65441 7.84393 5.7653 6.92196M3.74181 20.5545C3.74181 20.5545 3.74181 20.5545 3.74181 20.5545ZM20.2585 20.5545C21.4581 19.1091 21.0466 16.9146 20.2237 12.5257C19.6385 9.40452 19.3459 7.84393 18.235 6.92196M20.2585 20.5545C20.2585 20.5545 20.2585 20.5545 20.2585 20.5545ZM18.235 6.92196C17.1241 6 15.5363 6 12.3607 6H11.6395C8.46398 6 6.8762 6 5.7653 6.92196M18.235 6.92196C18.235 6.92196 18.235 6.92196 18.235 6.92196ZM5.7653 6.92196C5.7653 6.92196 5.7653 6.92196 5.7653 6.92196Z"
-                          stroke="#999"
+                          stroke="#ef0f87"
                           strokeWidth="1.5"
                         />
                         <path
                           d="M9 6V5C9 3.34315 10.3431 2 12 2C13.6569 2 15 3.34315 15 5V6"
-                          stroke="#999"
+                          stroke="#ef0f87"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                         />
@@ -371,63 +371,70 @@ function NavBar() {
 
 
 
-{categories.map((category, index) => {
-  const relatedSubs = subCategories.filter(
-    (sub) => sub.category === category.name
-  );
+<div className="xl:hidden">
+  {categories.map((category, index) => {
+    const relatedSubs = subCategories.filter(
+      (sub) => sub.category === category.name
+    );
 
-  const hasSubCategories = relatedSubs.length > 0;
+    const hasSubCategories = relatedSubs.length > 0;
 
-  return (
-    <li
-      key={index}
-      className="br_group/item relative"
-      onMouseEnter={() => setHoveredIndex(index)}
-      onMouseLeave={() => setHoveredIndex(null)}
-    >
-      <a
-        className="br_flex br_items-center br_justify-between br_px-8 br_py-4 br_border-b br_text-grey-600 br_text-lg-sans-bold-stretched br_no-underline"
-        {...(!hasSubCategories && {
-          href: `/search?cat=${encodeURIComponent(category.name)}`,
-        })}
+    return (
+      <li
+        key={index}
+        className="br_group/item relative"
+        onMouseEnter={() => setHoveredIndex(index)}
+        onMouseLeave={() => setHoveredIndex(null)}
       >
-        <div style={{ fontSize: "13px" }} className="br_flex br_items-center br_gap-2 myGray1">
-          {category.name}
-        </div>
-      </a>
-
-      {hasSubCategories && (
-        <div
-          className={`subMenu br_bg-white br_transition-all br_duration-300 br_ease-in-out
-            xl:pointer-fine:br_absolute xl:pointer-fine:br_left-0 xl:pointer-fine:br_w-screen
-            ${hoveredIndex === index
-              ? 'br_max-h-[500px] br_opacity-100 br_pointer-events-auto br_z-20'
-              : 'br_max-h-0 br_opacity-0 br_pointer-events-none'
-            }`}
+        <a
+          className="br_flex br_items-center br_justify-between br_px-8 br_py-4 br_border-b br_text-grey-600 br_text-lg-sans-bold-stretched br_no-underline"
+          {...(!hasSubCategories && {
+            href: `/search?cat=${encodeURIComponent(category.name)}`,
+          })}
         >
-          <div className="br_px-8 br_py-4 xl:pointer-fine:br_pb-8 xl:pointer-fine:br_pt-12">
-            <hr className="br_hidden br_border-none xl:pointer-fine:br_block xl:pointer-fine:br_bg-grey-200 br_absolute br_w-full br_h-[1px] br_top-[5px] br_left-0" />
-            <ul className="br_columns-2 br_gap-4 xl:pointer-fine:br_flex xl:pointer-fine:br_gap-5 xl:pointer-fine:br_justify-center xl:pointer-fine:br_items-stretch 2xl:pointer-fine:br_justify-start 2xl:pointer-fine:br_ml-[140px]">
-              {relatedSubs.map((sub, subIndex) => (
-                <li
-                  key={subIndex}
-                  className="br_group/sub-item br_break-inside-avoid xl:pointer-fine:br_w-[10vw] xl:pointer-fine:br_max-w-[120px] xl:pointer-fine:br_text-center"
-                >
-                  <a
-                    href={`/search?subcat=${encodeURIComponent(sub.name)}`}
-                    className="br_block br_py-2 br_text-grey-500 br_no-underline br_text-base-sans-stretched hover:br_text-orange active:br_text-orange xl:pointer-fine:br_relative xl:pointer-fine:br_py-0 xl:pointer-fine:br_flex xl:pointer-fine:br_flex-col xl:pointer-fine:br_gap-1 xl:pointer-fine:br_items-center"
-                  >
-                    <span>{sub.name}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div
+            style={{ fontSize: "13px" }}
+            className="br_flex br_items-center br_gap-2 myNewC"
+          >
+            {category.name}
           </div>
-        </div>
-      )}
-    </li>
-  );
-})}
+        </a>
+
+        {hasSubCategories && (
+          <div
+            className={`subMenu br_bg-white br_transition-all br_duration-300 br_ease-in-out
+            xl:pointer-fine:br_absolute xl:pointer-fine:br_left-0 xl:pointer-fine:br_w-screen
+            ${
+              hoveredIndex === index
+                ? "br_max-h-[500px] br_opacity-100 br_pointer-events-auto br_z-20"
+                : "br_max-h-0 br_opacity-0 br_pointer-events-none"
+            }`}
+          >
+            <div className="br_px-8 br_py-4 xl:pointer-fine:br_pb-8 xl:pointer-fine:br_pt-12">
+              <hr className="br_hidden br_border-none xl:pointer-fine:br_block xl:pointer-fine:br_bg-grey-200 br_absolute br_w-full br_h-[1px] br_top-[5px] br_left-0" />
+              <ul className="br_columns-2 br_gap-4 xl:pointer-fine:br_flex xl:pointer-fine:br_gap-5 xl:pointer-fine:br_justify-center xl:pointer-fine:br_items-stretch 2xl:pointer-fine:br_justify-start 2xl:pointer-fine:br_ml-[140px]">
+                {relatedSubs.map((sub, subIndex) => (
+                  <li
+                    key={subIndex}
+                    className="br_group/sub-item br_break-inside-avoid xl:pointer-fine:br_w-[10vw] xl:pointer-fine:br_max-w-[120px] xl:pointer-fine:br_text-center"
+                  >
+                    <a
+                      href={`/search?subcat=${encodeURIComponent(sub.name)}`}
+                      className="br_block br_py-2 br_text-grey-500 br_no-underline br_text-base-sans-stretched hover:br_text-orange active:br_text-orange xl:pointer-fine:br_relative xl:pointer-fine:br_py-0 xl:pointer-fine:br_flex xl:pointer-fine:br_flex-col xl:pointer-fine:br_gap-1 xl:pointer-fine:br_items-center"
+                    >
+                      <span>{sub.name}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
+      </li>
+    );
+  })}
+</div>
+
 
 
 
@@ -472,7 +479,7 @@ function NavBar() {
                   href="/shop"
                   id="4_travel_all-travel"
                 >
-                  <div className="br_flex br_items-center br_gap-2 myGray1">Shop All</div>
+                  <div className="br_flex br_items-center br_gap-2 myNewC">Shop All</div>
                 </a>
 
               </li>
@@ -482,7 +489,7 @@ function NavBar() {
                   href="/about"
                   id="4_travel_all-travel"
                 >
-                  <div className="br_flex br_items-center br_gap-2 myGray1">About Us</div>
+                  <div className="br_flex br_items-center br_gap-2 myNewC">About Us</div>
                 </a>
 
               </li>
@@ -492,7 +499,7 @@ function NavBar() {
                   href="/contact"
                   id="about-us_about-us"
                 >
-                  <div className="br_flex br_items-center br_gap-2 myGray1">Contact Us</div>
+                  <div className="br_flex br_items-center br_gap-2 myNewC">Contact Us</div>
                 </a>
               </li>
             </ul>
@@ -502,14 +509,14 @@ function NavBar() {
 
       <style
         dangerouslySetInnerHTML={{
-          __html: "\n.menuicon svg { \n    stroke: #999; \n}\n"
+          __html: "\n.menuicon svg { \n    stroke: #ef0f87; \n}\n"
         }}
       />
 
       <style
         dangerouslySetInnerHTML={{
           __html:
-            "\n    .pageHeaderMenuPreHeader .hamburger span { \n        background: #999; \n    }\n"
+            "\n    .pageHeaderMenuPreHeader .hamburger span { \n        background: #ef0f87; \n    }\n"
         }}
       />
 

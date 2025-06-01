@@ -129,6 +129,6 @@ export default WhatsAppButton;
 //   `;
 
 //     const encodedMessage = encodeURIComponent(message);
-//     const phoneNumber = '96176858204';  
+//     const phoneNumber = '66832486675';  
 //     return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 // };

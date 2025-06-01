@@ -989,7 +989,7 @@ const page = () => {
                             />
                             Cash on Delivery
                           </label>
-                          <label className="myGray1">
+                          {/* <label className="myGray1">
                             <input
                               type="radio"
                               value="online"
@@ -998,7 +998,7 @@ const page = () => {
                               className="mr-2 myGray1"
                             />
                             Online Payment
-                          </label>
+                          </label> */}
                         </div>
 
                         {total !== null && (
